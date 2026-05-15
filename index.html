@@ -38,7 +38,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
 
 <!-- Manifest -->
-<link rel="manifest" href='data:application/manifest+json;charset=utf-8,{"name":"בגרות לליאור","short_name":"בגרות","start_url":"/","display":"standalone","background_color":"%231a1a2e","theme_color":"%231a1a2e","icons":[{"src":"data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>📚</text></svg>","sizes":"any","type":"image/svg+xml"}]}'>
+<link rel="manifest" href='data:application/manifest+json;charset=utf-8,{"name":"בגרות AI","short_name":"בגרות AI","start_url":"/","display":"standalone","background_color":"%231a1a2e","theme_color":"%231a1a2e","icons":[{"src":"data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>📚</text></svg>","sizes":"any","type":"image/svg+xml"}]}'>
 
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -230,6 +230,143 @@ footer{border-top:1px solid var(--card-border);padding:36px 0 24px;margin-top:60
 }
 .high-contrast{filter:contrast(1.5)}
 .large-text{font-size:118%}
+
+/* === EXAM MODE === */
+.subject-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.subject-btn{flex:1;min-width:120px;background:var(--card);border:1px solid var(--card-border);color:var(--text);padding:10px 14px;border-radius:10px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;text-align:center}
+.subject-btn:hover{background:rgba(255,255,255,.08);border-color:var(--accent3)}
+.subject-btn.exam{background:linear-gradient(135deg,rgba(245,158,11,.2),rgba(239,68,68,.15));border-color:rgba(245,158,11,.4);color:#fbbf24}
+.subject-btn.exam:hover{background:linear-gradient(135deg,rgba(245,158,11,.3),rgba(239,68,68,.25));border-color:#f59e0b}
+
+.exam-intro{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(239,68,68,.06));border:1px solid rgba(245,158,11,.3);border-radius:var(--radius);padding:24px;margin-bottom:24px}
+.exam-intro h2{font-size:24px;font-weight:900;margin-bottom:10px;color:#fbbf24}
+.exam-intro p{color:var(--text-dim);font-size:15px;line-height:1.7}
+.exam-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:30px}
+.exam-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:22px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.exam-card::before{content:"";position:absolute;top:0;right:0;width:100%;height:3px;background:linear-gradient(135deg,#f59e0b,#ef4444);transform:scaleX(0);transform-origin:right;transition:transform .3s}
+.exam-card:hover{transform:translateY(-3px);border-color:#fbbf24;background:rgba(255,255,255,.07)}
+.exam-card:hover::before{transform:scaleX(1)}
+.exam-num{font-size:32px;font-weight:900;color:#fbbf24;line-height:1}
+.exam-title{font-size:16px;font-weight:700;margin:8px 0 4px;color:var(--text)}
+.exam-subtitle{font-size:13px;color:var(--text-dim);margin-bottom:14px}
+.exam-meta{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--text-mute)}
+.exam-meta span{background:rgba(255,255,255,.04);padding:4px 10px;border-radius:999px;border:1px solid var(--card-border)}
+.exam-prev-score{margin-top:10px;font-size:13px;color:var(--accent3);font-weight:700}
+
+.ministry-link{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:18px;text-align:center;margin-top:20px}
+.ministry-link a{color:var(--accent3);text-decoration:none;font-weight:700}
+.ministry-link a:hover{text-decoration:underline}
+
+.exam-shell{max-width:820px;margin:0 auto}
+.exam-bar{position:sticky;top:80px;background:rgba(15,15,30,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--card-border);border-radius:var(--radius);padding:14px 18px;margin-bottom:18px;z-index:40;box-shadow:0 4px 20px rgba(0,0,0,.4)}
+.exam-bar-top{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.exam-title-bar{font-size:15px;font-weight:700;color:var(--text)}
+.exam-timer{display:inline-flex;align-items:center;gap:8px;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.4);padding:8px 18px;border-radius:999px;font-family:'Inter',monospace;font-size:20px;font-weight:800;color:var(--accent3);transition:all .3s}
+.exam-timer.warn{background:rgba(245,158,11,.18);border-color:rgba(245,158,11,.5);color:#fbbf24}
+.exam-timer.danger{background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.6);color:#fca5a5;animation:pulseRed 1s infinite}
+@keyframes pulseRed{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(239,68,68,.5)}50%{transform:scale(1.03);box-shadow:0 0 0 8px rgba(239,68,68,0)}}
+.exam-nav{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.nav-dot{width:36px;height:36px;border-radius:50%;border:2px solid var(--card-border);background:var(--card);color:var(--text);font-family:'Inter',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;justify-content:center;position:relative}
+.nav-dot:hover{transform:scale(1.1);border-color:var(--accent3)}
+.nav-dot.answered{background:rgba(16,185,129,.2);border-color:var(--success);color:#6ee7b7}
+.nav-dot.marked::after{content:"⚑";position:absolute;top:-4px;right:-4px;font-size:11px;color:#fbbf24}
+.nav-dot.current{background:var(--gradient);border-color:#fff;color:#fff;transform:scale(1.12)}
+
+.exam-q-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
+.exam-q-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px}
+.exam-q-counter{font-size:15px;font-weight:700;color:var(--accent3)}
+.exam-q-actions{display:flex;gap:8px;flex-wrap:wrap}
+.mark-btn{background:var(--card);border:1px solid var(--card-border);color:var(--text);padding:6px 14px;border-radius:999px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.mark-btn:hover{border-color:#fbbf24;background:rgba(245,158,11,.08)}
+.mark-btn.active{background:rgba(245,158,11,.18);border-color:#fbbf24;color:#fbbf24}
+.exam-option-btn{background:rgba(255,255,255,.03);border:2px solid var(--card-border);border-radius:12px;padding:16px 20px;text-align:right;font-size:16px;font-family:inherit;color:var(--text);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:14px;line-height:1.5;width:100%}
+.exam-option-btn:hover{border-color:var(--accent3);background:rgba(124,58,237,.08)}
+.exam-option-btn.selected{background:rgba(124,58,237,.18);border-color:var(--accent3)}
+.exam-option-btn.selected .option-letter{background:var(--accent);color:#fff;border-color:var(--accent)}
+.exam-controls{display:flex;justify-content:space-between;gap:12px;margin-top:24px;flex-wrap:wrap}
+.exam-controls-group{display:flex;gap:10px;flex-wrap:wrap}
+.btn-warn{background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff}
+.btn-warn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(239,68,68,.4)}
+
+/* Confirm dialog */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .2s}
+.modal{background:var(--bg2);border:1px solid var(--card-border);border-radius:var(--radius);padding:28px;max-width:440px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.modal h3{font-size:22px;font-weight:800;margin-bottom:10px}
+.modal p{color:var(--text-dim);margin-bottom:20px;line-height:1.6}
+.modal-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+/* Exam results */
+.exam-results{max-width:880px;margin:0 auto}
+.score-hero{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:36px 24px;text-align:center;margin-bottom:24px;position:relative;overflow:hidden}
+.score-hero::before{content:"";position:absolute;top:0;left:0;right:0;height:6px}
+.score-hero.excellent::before{background:linear-gradient(135deg,#10b981,#059669)}
+.score-hero.good::before{background:linear-gradient(135deg,#3b82f6,#1d4ed8)}
+.score-hero.pass::before{background:linear-gradient(135deg,#f59e0b,#d97706)}
+.score-hero.practice::before{background:linear-gradient(135deg,#f97316,#ea580c)}
+.score-emoji{font-size:72px;margin-bottom:8px;display:inline-block;animation:scoreReveal .6s cubic-bezier(.34,1.56,.64,1)}
+@keyframes scoreReveal{0%{transform:scale(0) rotate(-180deg);opacity:0}100%{transform:scale(1) rotate(0);opacity:1}}
+.score-label{font-size:24px;font-weight:800;margin-bottom:8px}
+.score-label.excellent{color:#10b981}
+.score-label.good{color:#3b82f6}
+.score-label.pass{color:#f59e0b}
+.score-label.practice{color:#f97316}
+.score-number{font-size:96px;font-weight:900;line-height:1;margin:14px 0;background:var(--gradient);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:scoreCount .8s ease-out}
+@keyframes scoreCount{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.score-outof{font-size:18px;color:var(--text-dim);font-weight:600}
+.time-analysis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:22px 0}
+.time-card{background:var(--card);border:1px solid var(--card-border);border-radius:12px;padding:16px;text-align:center}
+.time-card-num{font-size:24px;font-weight:800;color:var(--accent3);font-family:'Inter',sans-serif}
+.time-card-label{font-size:12px;color:var(--text-dim);margin-top:4px}
+
+.topic-breakdown{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:22px;margin:20px 0}
+.topic-breakdown h3{font-size:18px;font-weight:800;margin-bottom:14px}
+.topic-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;font-size:14px}
+.topic-name{flex:0 0 auto;min-width:120px;max-width:200px;color:var(--text)}
+.topic-bar{flex:1;background:rgba(255,255,255,.05);border-radius:999px;height:14px;overflow:hidden;position:relative}
+.topic-bar-fill{height:100%;border-radius:999px;transition:width .8s ease}
+.topic-bar-fill.strong{background:linear-gradient(135deg,#10b981,#059669)}
+.topic-bar-fill.weak{background:linear-gradient(135deg,#f97316,#ef4444)}
+.topic-bar-fill.medium{background:linear-gradient(135deg,#f59e0b,#d97706)}
+.topic-score{flex:0 0 50px;text-align:left;font-weight:700;font-family:'Inter',sans-serif;color:var(--text-dim);font-size:13px}
+
+.review-list{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:22px;margin:20px 0}
+.review-list h3{font-size:18px;font-weight:800;margin-bottom:14px}
+.review-item{background:rgba(255,255,255,.03);border:1px solid var(--card-border);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:all .2s}
+.review-head{padding:14px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.review-head:hover{background:rgba(255,255,255,.04)}
+.review-num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;font-weight:800;font-family:'Inter',sans-serif;font-size:14px;flex-shrink:0}
+.review-num.correct{background:rgba(16,185,129,.2);color:#10b981;border:2px solid rgba(16,185,129,.5)}
+.review-num.wrong{background:rgba(239,68,68,.2);color:#ef4444;border:2px solid rgba(239,68,68,.5)}
+.review-num.skip{background:rgba(148,163,184,.2);color:#94a3b8;border:2px solid rgba(148,163,184,.4)}
+.review-summary{flex:1;font-size:14px;color:var(--text-dim);font-weight:600}
+.review-status{font-size:18px}
+.review-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.review-item.open .review-body{max-height:3000px}
+.review-content{padding:0 18px 18px;border-top:1px solid var(--card-border)}
+.review-content .q-text{font-size:16px;margin:14px 0}
+.review-content .options{margin-bottom:14px}
+.review-content .option-btn{cursor:default;padding:10px 14px;font-size:14px}
+.review-feedback{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.review-feedback button{background:var(--card);border:1px solid var(--card-border);color:var(--text);padding:8px 14px;border-radius:999px;font-family:inherit;font-size:13px;cursor:pointer;transition:all .2s}
+.review-feedback button:hover{border-color:var(--accent3)}
+.review-feedback button.active{background:var(--gradient);border-color:transparent;color:#fff}
+
+.encourage{background:linear-gradient(135deg,rgba(124,58,237,.12),rgba(59,130,246,.06));border:1px solid rgba(124,58,237,.3);border-radius:var(--radius);padding:22px;margin:20px 0;text-align:center}
+.encourage h3{font-size:18px;font-weight:800;margin-bottom:10px;color:var(--accent3)}
+.encourage p{color:var(--text);line-height:1.7;margin-bottom:6px}
+.history-banner{background:var(--card);border:1px solid var(--card-border);border-radius:12px;padding:12px 18px;margin:20px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:14px}
+.history-banner span{color:var(--text-dim)}
+.history-banner strong{color:var(--accent3)}
+
+@media (max-width:640px){
+ .exam-bar{top:72px;padding:10px 12px}
+ .exam-timer{font-size:17px;padding:6px 14px}
+ .nav-dot{width:30px;height:30px;font-size:12px}
+ .exam-q-card{padding:18px}
+ .score-number{font-size:64px}
+ .score-emoji{font-size:56px}
+ .exam-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -237,7 +374,7 @@ footer{border-top:1px solid var(--card-border);padding:36px 0 24px;margin-top:60
 
 <header>
  <div class="container nav">
-  <div class="logo" onclick="goHome()"><span class="logo-icon">📚</span><span>בגרות לליאור</span></div>
+  <div class="logo" onclick="goHome()"><span class="logo-icon">📚</span><span>בגרות AI</span></div>
   <div class="nav-stats" id="navStats" style="display:none">
    <span class="stat-pill">🎯 דיוק: <strong id="statAccuracy">0%</strong></span>
    <span class="stat-pill streak">🔥 רצף: <strong id="statStreak">0</strong></span>
@@ -984,6 +1121,446 @@ tip:"כלל זהב: Greedy עובד אם יש להוכיח \"תכונת בחיר
 ]
 };
 
+/* === EXAM QUESTION BANK ===
+   Questions are original, written in the style of Bagrut exams.
+   Format: {topic, difficulty, text, options, correct, explanation, points} */
+const EBANK = {
+/* MATH 3 — EXAM 1 (style מועד א׳ 2024) */
+"math_3_1":[
+{topic:"משוואות לינאריות",difficulty:1,text:"פתרו: 4x - 9 = 11",options:["x = 2","x = 4","x = 5","x = 6"],correct:2,explanation:"מעבירים את 9 לצד ימין: 4x = 20. מחלקים ב-4: x = 5. בדיקה: 4·5 - 9 = 11 ✓",points:10},
+{topic:"אחוזים",difficulty:1,text:"40% מתוך 250 הם:",options:["50","80","100","120"],correct:2,explanation:"40/100 · 250 = 0.4 · 250 = 100",points:10},
+{topic:"גאומטריה",difficulty:1,text:"היקף ריבוע הוא 36 ס״מ. מהו שטחו?",options:["36 סמ״ר","72 סמ״ר","81 סמ״ר","144 סמ״ר"],correct:2,explanation:"היקף ריבוע = 4·a, לכן a = 36/4 = 9 ס״מ. שטח = a² = 81 סמ״ר.",points:10},
+{topic:"סטטיסטיקה",difficulty:1,text:"מהו חציון הסדרה: 3, 7, 1, 9, 5?",options:["1","3","5","7"],correct:2,explanation:"ממיינים: 1, 3, 5, 7, 9. החציון הוא הערך האמצעי = 5.",points:10},
+{topic:"בעיות מילוליות",difficulty:2,text:"דני קנה 3 ספרים ב-15 ש״ח כל אחד וקיבל הנחה כוללת של 20%. כמה שילם?",options:["36 ש״ח","38 ש״ח","42 ש״ח","45 ש״ח"],correct:0,explanation:"מחיר מלא: 3·15 = 45 ש״ח. הנחה: 45·0.2 = 9. סופי: 45-9 = 36 ש״ח.",points:10},
+{topic:"פונקציה לינארית",difficulty:2,text:"מהו השיפוע של הישר y = -3x + 7?",options:["-3","-3/7","3","7"],correct:0,explanation:"בנוסחה y = mx + b, m הוא השיפוע. כאן m = -3.",points:10},
+{topic:"הסתברות",difficulty:1,text:"בשק 4 כדורים אדומים, 6 לבנים. מה הסיכוי לשלוף אדום?",options:["1/6","2/5","3/5","1/2"],correct:1,explanation:"P = 4/(4+6) = 4/10 = 2/5",points:10},
+{topic:"משוואות ריבועיות",difficulty:2,text:"פתרון המשוואה x² - 9 = 0:",options:["x=3 בלבד","x=±3","x=9","x=±9"],correct:1,explanation:"x² = 9 → x = ±√9 = ±3.",points:10},
+{topic:"גאומטריה - מעגל",difficulty:2,text:"רדיוס מעגל הוא 5 ס״מ. מהו שטחו (השתמשו π ≈ 3.14)?",options:["15.7 סמ״ר","31.4 סמ״ר","78.5 סמ״ר","157 סמ״ר"],correct:2,explanation:"שטח = π·r² = 3.14·25 = 78.5 סמ״ר.",points:10},
+{topic:"אחוזים מתקדם",difficulty:3,text:"מחיר עלה מ-200 ש״ח ל-250 ש״ח. באיזה אחוז עלה?",options:["20%","25%","30%","50%"],correct:1,explanation:"שינוי: 250-200 = 50. אחוז: (50/200)·100 = 25%.",points:10}
+],
+/* MATH 3 — EXAM 2 */
+"math_3_2":[
+{topic:"מערכות משוואות",difficulty:2,text:"פתרו: 2x + y = 8, x - y = 1",options:["x=2,y=4","x=3,y=2","x=4,y=0","x=1,y=6"],correct:1,explanation:"חיבור: 3x = 9 → x = 3. הצבה: 3 - y = 1 → y = 2.",points:10},
+{topic:"פונקציות",difficulty:2,text:"נתון f(x) = 2x + 3. מהו f(4)?",options:["7","9","11","14"],correct:2,explanation:"f(4) = 2·4 + 3 = 8 + 3 = 11.",points:10},
+{topic:"גאומטריה - משולש",difficulty:2,text:"במשולש ישר זווית, ניצב אחד 5, היתר 13. מהו הניצב השני?",options:["8","10","12","14"],correct:2,explanation:"לפי פיתגורס: b² = 13² - 5² = 169 - 25 = 144. b = 12.",points:10},
+{topic:"סטטיסטיקה",difficulty:1,text:"השכיח בסדרה: 2, 4, 4, 6, 4, 8, 2 הוא:",options:["2","4","6","8"],correct:1,explanation:"השכיח = הערך הנפוץ ביותר. 4 מופיע 3 פעמים — הכי הרבה.",points:10},
+{topic:"אחוזים",difficulty:2,text:"מהו 15% מ-80?",options:["8","10","12","15"],correct:2,explanation:"15/100 · 80 = 12.",points:10},
+{topic:"סדרות חשבוניות",difficulty:2,text:"בסדרה 2, 5, 8, 11... מהו האיבר ה-7?",options:["17","20","23","26"],correct:1,explanation:"d = 3, a₇ = 2 + 6·3 = 20.",points:10},
+{topic:"בעיות מילוליות",difficulty:2,text:"בכיתה 30 תלמידים, 60% מהם בנות. כמה בנים בכיתה?",options:["10","12","15","18"],correct:1,explanation:"בנות: 60%·30 = 18. בנים: 30-18 = 12.",points:10},
+{topic:"פונקציות",difficulty:2,text:"היכן y = 2x - 6 חותך את ציר y?",options:["(0, -6)","(0, 6)","(3, 0)","(-3, 0)"],correct:0,explanation:"חיתוך עם ציר y בנקודה שבה x=0: y = -6, ז״א (0,-6).",points:10},
+{topic:"הסתברות",difficulty:2,text:"מטילים שתי קוביות. מה הסיכוי שהסכום יהיה 7?",options:["1/6","1/12","1/8","6/36"],correct:0,explanation:"זוגות (1,6),(2,5),(3,4),(4,3),(5,2),(6,1) = 6 מתוך 36. P = 6/36 = 1/6.",points:10},
+{topic:"גאומטריה אנליטית",difficulty:3,text:"אורך הקטע בין (1,2) ל-(4,6) הוא:",options:["3","4","5","7"],correct:2,explanation:"d = √[(4-1)² + (6-2)²] = √[9+16] = √25 = 5.",points:10}
+],
+/* MATH 3 — EXAM 3 */
+"math_3_3":[
+{topic:"משוואות לינאריות",difficulty:1,text:"פתרו: 2(x + 3) = 14",options:["x = 2","x = 4","x = 5","x = 7"],correct:1,explanation:"פתיחת סוגריים: 2x + 6 = 14. מעבירים: 2x = 8. מחלקים: x = 4.",points:10},
+{topic:"שברים",difficulty:2,text:"כמה זה (2/3) + (1/4)?",options:["3/7","5/12","11/12","3/12"],correct:2,explanation:"מכנה משותף 12: 8/12 + 3/12 = 11/12.",points:10},
+{topic:"אחוזים",difficulty:2,text:"קניתי בגד ב-90 ש״ח אחרי הנחה של 25%. מה היה המחיר המקורי?",options:["100 ש״ח","115 ש״ח","120 ש״ח","135 ש״ח"],correct:2,explanation:"שילמתי 75% מהמקור: 0.75x = 90 → x = 120.",points:10},
+{topic:"גאומטריה - מלבן",difficulty:1,text:"מלבן באורך 12 ס״מ ושטחו 60 סמ״ר. מהו רוחבו?",options:["3","4","5","6"],correct:2,explanation:"שטח = אורך · רוחב → 60 = 12·b → b = 5 ס״מ.",points:10},
+{topic:"סטטיסטיקה",difficulty:2,text:"ממוצע של 5 מספרים הוא 12. אם נוסף מספר 18, מה הממוצע החדש?",options:["13","14","15","16"],correct:0,explanation:"סכום ישן: 5·12 = 60. סכום חדש: 60+18 = 78. ממוצע: 78/6 = 13.",points:10},
+{topic:"משוואות ריבועיות",difficulty:2,text:"פתרון: x² + x - 6 = 0",options:["x=1, x=-6","x=2, x=-3","x=3, x=-2","x=-2, x=-3"],correct:1,explanation:"פירוק: (x-2)(x+3) = 0 → x=2 או x=-3.",points:10},
+{topic:"גרפים",difficulty:2,text:"באיזו נקודה הישר y = x + 2 חותך את הישר y = -x + 6?",options:["(2,4)","(3,5)","(4,2)","(2,6)"],correct:0,explanation:"x+2 = -x+6 → 2x = 4 → x = 2, y = 4.",points:10},
+{topic:"הסתברות",difficulty:1,text:"קוביה הוגנת. מה הסיכוי לקבל 3 או 5?",options:["1/6","1/3","1/2","2/3"],correct:1,explanation:"שתי תוצאות מתוך 6: P = 2/6 = 1/3.",points:10},
+{topic:"בעיות תנועה",difficulty:2,text:"רכב נסע 180 ק״מ ב-2.5 שעות. מהירותו הממוצעת?",options:["60 קמ״ש","65 קמ״ש","72 קמ״ש","75 קמ״ש"],correct:2,explanation:"v = d/t = 180/2.5 = 72 קמ״ש.",points:10},
+{topic:"גאומטריה - היקף",difficulty:2,text:"היקף מלבן הוא 26 ס״מ, אורכו 8 ס״מ. שטחו?",options:["32 סמ״ר","40 סמ״ר","48 סמ״ר","56 סמ״ר"],correct:1,explanation:"היקף = 2(a+b) → 26 = 2(8+b) → b = 5. שטח = 8·5 = 40.",points:10}
+],
+/* MATH 3 — EXAM 4 */
+"math_3_4":[
+{topic:"בעיות גיל",difficulty:2,text:"אמא בת 40, בתה בת 12. בעוד כמה שנים אמא תהיה פי 2 מהבת?",options:["12","14","16","18"],correct:2,explanation:"40+x = 2(12+x) → 40+x = 24+2x → x = 16.",points:10},
+{topic:"אחוזים",difficulty:2,text:"מחיר ירד מ-150 ל-120 ש״ח. אחוז הירידה:",options:["15%","20%","25%","30%"],correct:1,explanation:"ירידה: 30. אחוז: (30/150)·100 = 20%.",points:10},
+{topic:"גאומטריה - משולש",difficulty:2,text:"שטח משולש ישר זווית עם ניצבים 6 ו-8 הוא:",options:["14","24","48","56"],correct:1,explanation:"שטח = (6·8)/2 = 24 סמ״ר.",points:10},
+{topic:"פונקציות לינאריות",difficulty:2,text:"מצאו את משוואת הישר העובר בנקודות (0,3) ו-(2,7):",options:["y = 2x + 3","y = x + 5","y = 3x + 1","y = 2x - 3"],correct:0,explanation:"שיפוע: m = (7-3)/(2-0) = 2. b = 3. לכן y = 2x + 3.",points:10},
+{topic:"סדרות הנדסיות",difficulty:2,text:"בסדרה: 2, 6, 18, 54... האיבר ה-5?",options:["108","162","216","324"],correct:1,explanation:"q = 3. a₅ = 2·3⁴ = 2·81 = 162.",points:10},
+{topic:"הסתברות מותנית",difficulty:3,text:"בכד 3 שחורים ו-5 לבנים. שולפים שניים ברצף ללא החזרה. סיכוי ששניהם שחורים?",options:["3/28","1/4","9/64","3/8"],correct:0,explanation:"P = (3/8)·(2/7) = 6/56 = 3/28.",points:10},
+{topic:"גאומטריה אנליטית",difficulty:3,text:"אמצע הקטע בין (2,3) ל-(8,9):",options:["(3,5)","(4,6)","(5,6)","(6,5)"],correct:2,explanation:"אמצע = ((2+8)/2, (3+9)/2) = (5,6).",points:10},
+{topic:"בעיות אחוזים",difficulty:3,text:"מספר עלה ב-50% ואז ירד ב-50%. השינוי הסופי:",options:["נשאר","ירד ב-25%","עלה ב-25%","ירד ב-50%"],correct:1,explanation:"100·1.5 = 150. 150·0.5 = 75. שינוי: -25% מהמקור.",points:10},
+{topic:"משוואות שורש",difficulty:3,text:"פתרו: √(x+5) = 4",options:["x = 9","x = 11","x = 16","x = 21"],correct:1,explanation:"מעלים בריבוע: x+5 = 16 → x = 11. בדיקה: √16 = 4 ✓",points:10},
+{topic:"סטטיסטיקה",difficulty:2,text:"כיתה: 20 תלמידים ממוצע 75. כיתה ב: 30 תלמידים ממוצע 80. ממוצע כולל?",options:["77","78","79","82"],correct:1,explanation:"(20·75 + 30·80)/50 = (1500+2400)/50 = 3900/50 = 78.",points:10}
+],
+/* MATH 5 — EXAM 1 */
+"math_5_1":[
+{topic:"גזירה",difficulty:2,text:"מהי הנגזרת של f(x) = x⁴ - 3x² + 5?",options:["4x³ - 6x","4x³ - 6x + 5","x³ - 3x","4x³ - 3x"],correct:0,explanation:"f'(x) = 4x³ - 6x. הקבוע 5 נגזר ל-0.",points:10},
+{topic:"אינטגרל",difficulty:2,text:"∫(2x + 3)dx =",options:["x² + 3x + C","2x² + 3x","x² + 3","2x + 3 + C"],correct:0,explanation:"∫2x dx = x², ∫3 dx = 3x. סך: x² + 3x + C.",points:10},
+{topic:"טריגונומטריה",difficulty:2,text:"sin²(x) + cos²(x) = ?",options:["0","1","2","sin(2x)"],correct:1,explanation:"זהות פיתגוראית בסיסית: sin²(x) + cos²(x) = 1.",points:10},
+{topic:"חקירת פונקציות",difficulty:3,text:"היכן f(x) = x³ - 3x מקבלת מקסימום מקומי?",options:["x = -1","x = 0","x = 1","אין"],correct:0,explanation:"f'(x) = 3x² - 3 = 0 → x = ±1. f''(x) = 6x. ב-x=-1: f'' < 0 → מקסימום.",points:10},
+{topic:"וקטורים",difficulty:2,text:"מהי המכפלה הסקלרית של (1,2) ו-(3,4)?",options:["6","8","11","14"],correct:2,explanation:"1·3 + 2·4 = 3 + 8 = 11.",points:10},
+{topic:"גאומטריה אנליטית",difficulty:3,text:"מרכז המעגל x² + y² - 4x + 6y - 12 = 0:",options:["(2,-3)","(-2,3)","(4,-6)","(2,3)"],correct:0,explanation:"השלמה לריבוע: (x-2)² + (y+3)² = 25. מרכז: (2,-3).",points:10},
+{topic:"הסתברות",difficulty:3,text:"בקופסה 5 כדורים: 2 אדומים, 3 כחולים. שולפים 2 ללא החזרה. סיכוי לאחד מכל צבע?",options:["3/5","6/10","3/10","2/5"],correct:0,explanation:"P(א ואז כ) + P(כ ואז א) = (2/5)(3/4) + (3/5)(2/4) = 6/20 + 6/20 = 12/20 = 3/5.",points:10},
+{topic:"לוגריתמים",difficulty:2,text:"log₂(32) = ?",options:["3","4","5","6"],correct:2,explanation:"2⁵ = 32 → log₂(32) = 5.",points:10},
+{topic:"גזירה - שיפוע",difficulty:3,text:"שיפוע המשיק ל-f(x) = x² בנקודה x=3:",options:["3","6","9","12"],correct:1,explanation:"f'(x) = 2x. f'(3) = 6.",points:10},
+{topic:"אינטגרל מסוים",difficulty:3,text:"∫₀² x² dx = ?",options:["4/3","8/3","2","4"],correct:1,explanation:"[x³/3] מ-0 ל-2 = 8/3 - 0 = 8/3.",points:10}
+],
+/* MATH 5 — EXAM 2 */
+"math_5_2":[
+{topic:"גזירת מכפלה",difficulty:3,text:"הנגזרת של f(x) = x²·sin(x):",options:["2x·cos(x)","2x·sin(x) + x²·cos(x)","2x·sin(x)","x²·cos(x)"],correct:1,explanation:"כלל המכפלה: (uv)' = u'v + uv' = 2x·sin(x) + x²·cos(x).",points:10},
+{topic:"אינטגרל בהצבה",difficulty:3,text:"∫2x·cos(x²) dx =",options:["sin(x²) + C","cos(x²) + C","2sin(x²) + C","-cos(x²) + C"],correct:0,explanation:"u = x², du = 2x dx. ∫cos(u)du = sin(u) + C = sin(x²) + C.",points:10},
+{topic:"טריגונומטריה",difficulty:2,text:"cos(60°) = ?",options:["1/2","√2/2","√3/2","1"],correct:0,explanation:"ערך ידוע: cos(60°) = 1/2.",points:10},
+{topic:"וקטורים",difficulty:3,text:"גודל הוקטור (3, 4):",options:["5","7","12","25"],correct:0,explanation:"|v| = √(9+16) = √25 = 5.",points:10},
+{topic:"חקירת פונקציה",difficulty:3,text:"היכן f(x) = (x-1)² יורדת?",options:["x > 1","x < 1","תמיד","אף פעם"],correct:1,explanation:"f'(x) = 2(x-1). שלילי כש-x < 1, לכן יורדת.",points:10},
+{topic:"קומבינטוריקה",difficulty:3,text:"כמה אופנים יש לבחור 3 מתוך 10?",options:["30","100","120","720"],correct:2,explanation:"C(10,3) = 10!/(3!·7!) = (10·9·8)/(3·2·1) = 120.",points:10},
+{topic:"גזירת מנה",difficulty:3,text:"הנגזרת של f(x) = x²/(x+1) בנקודה x=1:",options:["1/2","3/4","1","2"],correct:1,explanation:"f' = (2x(x+1) - x²)/(x+1)² = (x² + 2x)/(x+1)². ב-x=1: 3/4.",points:10},
+{topic:"גרפים",difficulty:3,text:"אסימפטוטה אופקית של f(x) = (2x+1)/(x-3):",options:["y = 2","y = 1","y = 0","y = -3"],correct:0,explanation:"כש-x→∞, היחס בין מקדמי החזקה הגבוהה: 2/1 = 2.",points:10},
+{topic:"הסתברות",difficulty:3,text:"מטילים מטבע 4 פעמים. סיכוי לקבל בדיוק 2 עצים?",options:["1/4","3/8","1/2","6/16"],correct:1,explanation:"C(4,2)·(1/2)⁴ = 6/16 = 3/8.",points:10},
+{topic:"אינטגרל מסוים",difficulty:3,text:"שטח בין y = x ו-y = x² בין 0 ל-1:",options:["1/6","1/3","1/2","1"],correct:0,explanation:"∫₀¹(x - x²)dx = [x²/2 - x³/3] = 1/2 - 1/3 = 1/6.",points:10}
+],
+/* MATH 5 — EXAM 3 */
+"math_5_3":[
+{topic:"גזירת רכבת",difficulty:3,text:"הנגזרת של f(x) = sin(2x):",options:["cos(2x)","2cos(2x)","-2cos(2x)","cos(x)"],correct:1,explanation:"כלל השרשרת: f' = 2·cos(2x).",points:10},
+{topic:"אופטימיזציה",difficulty:3,text:"איזה מספר כפול ההפרש שלו מ-10 נותן מקסימום?",options:["3","5","6","7"],correct:1,explanation:"f(x) = x(10-x) = 10x - x². f'(x) = 10 - 2x = 0 → x = 5.",points:10},
+{topic:"טריגונומטריה במרחב",difficulty:3,text:"במשולש ABC, a=6, b=8, ∠C=60°. אורך c?",options:["√52","√72","√76","√100"],correct:0,explanation:"משפט הקוסינוסים: c² = 36 + 64 - 2·6·8·cos(60°) = 100 - 48 = 52. c = √52.",points:10},
+{topic:"וקטורים תלת מימדיים",difficulty:3,text:"גודל הוקטור (2, -2, 1):",options:["3","5","√5","√9"],correct:0,explanation:"|v| = √(4+4+1) = √9 = 3.",points:10},
+{topic:"חקירת פונקציה",difficulty:3,text:"נקודות הקיצון של f(x) = x³ - 12x:",options:["x=±1","x=±2","x=±3","x=±4"],correct:1,explanation:"f'(x) = 3x² - 12 = 0 → x² = 4 → x = ±2.",points:10},
+{topic:"לוגריתמים",difficulty:3,text:"פתרו: log(x) + log(x-3) = 1",options:["x=5","x=10","x=-2","x=8"],correct:0,explanation:"log(x(x-3)) = 1 → x²-3x = 10 → x²-3x-10=0 → (x-5)(x+2)=0. רק x=5 חיובי ובתחום.",points:10},
+{topic:"אינטגרל",difficulty:3,text:"∫(3x² + 2x - 1)dx =",options:["x³ + x² - x + C","x³ + x² + x + C","6x + 2 + C","3x³ + 2x²"],correct:0,explanation:"איבר-איבר: x³ + x² - x + C.",points:10},
+{topic:"הסתברות",difficulty:3,text:"בכד 7 כדורים, 3 פגומים. שולפים 2. סיכוי ששניהם תקינים:",options:["4/7","2/7","6/14","12/42"],correct:0,explanation:"P = (4/7)·(3/6) = 12/42 = 2/7. רגע — בדיקה: 12/42 = 2/7. תשובה ב.",points:10},
+{topic:"גזירה ושיפוע",difficulty:3,text:"שיפוע הנורמל ל-f(x) = x² בנקודה x=2:",options:["-1/4","-1/2","1/4","4"],correct:0,explanation:"f'(2) = 4. שיפוע הנורמל = -1/4 (הופכי בסימן הפוך).",points:10},
+{topic:"גאומטריה אנליטית",difficulty:3,text:"מרחק הנקודה (4,3) מהראשית:",options:["3","4","5","7"],correct:2,explanation:"d = √(16+9) = √25 = 5.",points:10}
+],
+/* MATH 5 — EXAM 4 */
+"math_5_4":[
+{topic:"גזירה כללית",difficulty:3,text:"הנגזרת של f(x) = e^(2x):",options:["e^(2x)","2e^(2x)","e^(2x)·2x","2x·e^x"],correct:1,explanation:"שרשרת: (e^u)' = u'·e^u = 2·e^(2x).",points:10},
+{topic:"אינטגרל",difficulty:3,text:"∫e^x dx =",options:["e^x","e^x + C","x·e^x","e^(x+1)/(x+1) + C"],correct:1,explanation:"זה אינטגרל בסיסי: ∫e^x dx = e^x + C.",points:10},
+{topic:"טריגונומטריה",difficulty:3,text:"sin(45°) · cos(45°) = ?",options:["1/4","1/2","√2/2","1"],correct:1,explanation:"(√2/2)·(√2/2) = 2/4 = 1/2.",points:10},
+{topic:"אופטימיזציה",difficulty:3,text:"היקף מלבן הוא 20. שטח מקסימלי?",options:["20","25","36","100"],correct:1,explanation:"2(a+b) = 20 → b = 10-a. S = a(10-a). S' = 10-2a = 0 → a=5. S = 25.",points:10},
+{topic:"וקטורים",difficulty:3,text:"זווית בין (1,0) ל-(1,1):",options:["30°","45°","60°","90°"],correct:1,explanation:"cos(θ) = (1·1+0·1)/(1·√2) = 1/√2 → θ = 45°.",points:10},
+{topic:"קומבינטוריקה",difficulty:3,text:"מספר התמורות של 4 אותיות שונות:",options:["4","12","16","24"],correct:3,explanation:"4! = 24.",points:10},
+{topic:"חקירה",difficulty:3,text:"f(x) = -x² + 4x. ערך מקסימלי?",options:["2","4","6","8"],correct:1,explanation:"f'(x) = -2x + 4 = 0 → x = 2. f(2) = -4 + 8 = 4.",points:10},
+{topic:"לוגריתמים",difficulty:3,text:"log₃(81) = ?",options:["2","3","4","9"],correct:2,explanation:"3⁴ = 81 → log₃(81) = 4.",points:10},
+{topic:"גאומטריה",difficulty:3,text:"נפח כדור עם רדיוס 3 (π≈3.14):",options:["28.3","36π","113.1","36"],correct:1,explanation:"V = (4/3)π·r³ = (4/3)·π·27 = 36π.",points:10},
+{topic:"סטטיסטיקה - שונות",difficulty:3,text:"סטיית התקן של 2, 4, 6, 8 (ממוצע 5):",options:["√5","2.24","2.5","√6"],correct:1,explanation:"שונות = ((9+1+1+9)/4) = 5. סטייה = √5 ≈ 2.24.",points:10}
+],
+/* MATH 4 — EXAM 1 */
+"math_4_1":[
+{topic:"גזירה",difficulty:1,text:"הנגזרת של f(x) = x² + 4x:",options:["2x + 4","x² + 4","2x","x + 4"],correct:0,explanation:"איבר-איבר: 2x + 4.",points:10},
+{topic:"שיפוע משיק",difficulty:2,text:"שיפוע המשיק ל-f(x) = x² בנקודה x=2:",options:["2","4","6","8"],correct:1,explanation:"f'(x) = 2x. f'(2) = 4.",points:10},
+{topic:"טריגונומטריה",difficulty:2,text:"sin(30°) = ?",options:["1/2","√2/2","√3/2","1"],correct:0,explanation:"ערך ידוע: sin(30°) = 1/2.",points:10},
+{topic:"פונקציות",difficulty:2,text:"תחום ההגדרה של 1/(x-2):",options:["x ≠ 0","x ≠ 2","x > 2","כל x"],correct:1,explanation:"המכנה ≠ 0 → x ≠ 2.",points:10},
+{topic:"סדרות הנדסיות",difficulty:2,text:"בסדרה הנדסית: a₁=2, q=3. האיבר ה-4?",options:["18","54","162","81"],correct:1,explanation:"a₄ = 2·3³ = 54.",points:10},
+{topic:"הסתברות",difficulty:2,text:"מטילים 2 קוביות. סיכוי ששתיהן 6:",options:["1/6","1/12","1/36","2/36"],correct:2,explanation:"(1/6)·(1/6) = 1/36.",points:10},
+{topic:"חקירת פונקציה",difficulty:3,text:"היכן f(x) = x² - 4x מקבלת מינימום?",options:["x = 0","x = 2","x = 4","x = -2"],correct:1,explanation:"f'(x) = 2x - 4 = 0 → x = 2.",points:10},
+{topic:"גאומטריה אנליטית",difficulty:2,text:"מרכז ואורך הקטע מ-(1,1) ל-(5,5):",options:["מרכז (3,3) אורך √32","מרכז (2,2) אורך 4","מרכז (3,3) אורך 4","מרכז (4,4) אורך √32"],correct:0,explanation:"מרכז: (3,3). אורך: √((5-1)²+(5-1)²) = √32.",points:10},
+{topic:"לוגריתמים",difficulty:2,text:"log₁₀(1000) = ?",options:["2","3","4","10"],correct:1,explanation:"10³ = 1000.",points:10},
+{topic:"אינטגרל",difficulty:3,text:"∫(2x)dx =",options:["x² + C","2 + C","x + C","2x² + C"],correct:0,explanation:"∫2x dx = x² + C.",points:10}
+],
+/* MATH 4 — EXAM 2 */
+"math_4_2":[
+{topic:"גזירה",difficulty:2,text:"הנגזרת של f(x) = (x+1)²:",options:["2(x+1)","2x","(x+1)","x+1"],correct:0,explanation:"שרשרת: 2(x+1)·1 = 2(x+1).",points:10},
+{topic:"חקירה",difficulty:3,text:"f(x) = x³ - 3x. נקודות קיצון?",options:["x=±1","x=±2","x=0","אין"],correct:0,explanation:"f'(x) = 3x² - 3 = 0 → x = ±1.",points:10},
+{topic:"טריגונומטריה",difficulty:2,text:"במשולש ישר זווית: יתר 10, sin(α) = 0.6. הניצב הנגדי?",options:["4","6","8","10"],correct:1,explanation:"sin = ניצב/יתר → ניצב = 10·0.6 = 6.",points:10},
+{topic:"סדרות חשבוניות",difficulty:2,text:"בסדרה חשבונית a₁=3, d=4. סכום 10 איברים:",options:["210","220","230","250"],correct:0,explanation:"S = (n/2)(2a₁+(n-1)d) = 5(6+36) = 5·42 = 210.",points:10},
+{topic:"הסתברות",difficulty:3,text:"בכד 4 לבן, 6 שחור. שולפים 2 בלי החזרה. שניהם לבנים:",options:["1/9","2/15","4/25","2/5"],correct:1,explanation:"(4/10)·(3/9) = 12/90 = 2/15.",points:10},
+{topic:"גאומטריה",difficulty:3,text:"שטח מעגל עם היקף 10π:",options:["25π","10π","5π","100π"],correct:0,explanation:"היקף = 2πr = 10π → r=5. שטח = πr² = 25π.",points:10},
+{topic:"פונקציה ריבועית",difficulty:2,text:"נקודות חיתוך של y = x² - 5x + 6 עם ציר x:",options:["x=1, x=6","x=2, x=3","x=-2, x=-3","x=0, x=5"],correct:1,explanation:"(x-2)(x-3) = 0 → x=2,3.",points:10},
+{topic:"לוגריתמים",difficulty:3,text:"פתרו: 2^x = 8",options:["x = 2","x = 3","x = 4","x = 8"],correct:1,explanation:"8 = 2³ → x = 3.",points:10},
+{topic:"וקטורים",difficulty:3,text:"סכום (1,2) + (3,-1):",options:["(4,1)","(4,3)","(2,3)","(-2,3)"],correct:0,explanation:"רכיב-רכיב: (1+3, 2-1) = (4,1).",points:10},
+{topic:"אופטימיזציה",difficulty:3,text:"שטח מקסימלי של מלבן עם היקף 16:",options:["8","12","16","20"],correct:2,explanation:"ריבוע 4×4 → שטח = 16.",points:10}
+],
+/* ENGLISH 3 — EXAM 1 */
+"english_3_1":[
+{topic:"Grammar - Present Simple",difficulty:1,text:"She _____ to school every day.",options:["go","goes","going","gone"],correct:1,explanation:"3rd person singular (she) uses 'goes' in Present Simple.",points:10},
+{topic:"Vocabulary",difficulty:1,text:"What is the opposite of 'big'?",options:["large","small","huge","tall"],correct:1,explanation:"'Small' is the antonym of 'big'.",points:10},
+{topic:"Past Simple",difficulty:1,text:"Yesterday I _____ a movie.",options:["watch","watches","watched","watching"],correct:2,explanation:"Yesterday → Past Simple. 'Watch' becomes 'watched'.",points:10},
+{topic:"Reading",difficulty:2,text:"\"Tom is a doctor. He works in a hospital.\" Where does Tom work?",options:["School","Hospital","Bank","Store"],correct:1,explanation:"The text states 'He works in a hospital.'",points:10},
+{topic:"Articles",difficulty:1,text:"I saw _____ elephant at the zoo.",options:["a","an","the","-"],correct:1,explanation:"'An' before vowel sounds (elephant starts with 'e').",points:10},
+{topic:"Prepositions",difficulty:2,text:"The book is _____ the table.",options:["in","on","at","under"],correct:1,explanation:"For surfaces we use 'on'.",points:10},
+{topic:"Plurals",difficulty:1,text:"The plural of 'child' is:",options:["childs","childes","children","childer"],correct:2,explanation:"Irregular plural: child → children.",points:10},
+{topic:"Question form",difficulty:2,text:"_____ do you live?",options:["What","Where","Who","Why"],correct:1,explanation:"Asking about a place → 'Where'.",points:10},
+{topic:"Reading comprehension",difficulty:2,text:"\"Sara has two cats and one dog.\" How many pets does Sara have?",options:["2","3","4","1"],correct:1,explanation:"2 cats + 1 dog = 3 pets.",points:10},
+{topic:"Vocabulary",difficulty:2,text:"A 'kitchen' is a room where you:",options:["sleep","cook","study","wash"],correct:1,explanation:"A kitchen is for cooking.",points:10}
+],
+/* ENGLISH 3 — EXAM 2 */
+"english_3_2":[
+{topic:"Present Continuous",difficulty:2,text:"Look! The baby _____.",options:["cry","cries","is crying","cried"],correct:2,explanation:"'Look!' signals Present Continuous → 'is crying'.",points:10},
+{topic:"Comparatives",difficulty:2,text:"This box is _____ than that one.",options:["big","bigger","biggest","more big"],correct:1,explanation:"Comparative of short adjective: big → bigger.",points:10},
+{topic:"Modal verbs",difficulty:2,text:"You _____ smoke here. It's forbidden.",options:["can","must","mustn't","should"],correct:2,explanation:"Forbidden → mustn't.",points:10},
+{topic:"Vocabulary",difficulty:1,text:"What do you wear on your feet?",options:["Hat","Gloves","Shoes","Scarf"],correct:2,explanation:"Shoes are worn on feet.",points:10},
+{topic:"Verb 'to be'",difficulty:1,text:"They _____ from Israel.",options:["am","is","are","be"],correct:2,explanation:"Plural subject (they) → 'are'.",points:10},
+{topic:"Reading",difficulty:2,text:"\"The library closes at 8 PM.\" When does the library close?",options:["At 8 AM","At 8 PM","At 6 PM","All day"],correct:1,explanation:"Directly stated: 8 PM.",points:10},
+{topic:"Possessives",difficulty:1,text:"That's _____ book. It belongs to her.",options:["she","her","hers","his"],correct:1,explanation:"Before a noun: 'her' (possessive adjective).",points:10},
+{topic:"Numbers/Time",difficulty:1,text:"How many days are in a week?",options:["5","6","7","30"],correct:2,explanation:"A week has 7 days.",points:10},
+{topic:"Object pronouns",difficulty:2,text:"I saw John yesterday. I talked to _____.",options:["he","him","his","himself"],correct:1,explanation:"Object pronoun for 'he' → 'him'.",points:10},
+{topic:"Adverbs",difficulty:2,text:"She sings _____.",options:["beautiful","beautifully","beauty","beautify"],correct:1,explanation:"Verb 'sings' → adverb 'beautifully'.",points:10}
+],
+/* ENGLISH 4 — EXAM 1 */
+"english_4_1":[
+{topic:"Reading comprehension",difficulty:2,text:"\"Solar panels convert sunlight into electricity.\" What do solar panels do?",options:["Store water","Create wind","Convert sunlight to electricity","Cool houses"],correct:2,explanation:"Direct answer in the text.",points:10},
+{topic:"Vocabulary",difficulty:2,text:"'Reluctant' means:",options:["Eager","Unwilling","Confused","Excited"],correct:1,explanation:"Reluctant = hesitant, unwilling.",points:10},
+{topic:"Present Perfect",difficulty:2,text:"I _____ never been to Paris.",options:["have","has","had","having"],correct:0,explanation:"'I have' in Present Perfect.",points:10},
+{topic:"Conditionals",difficulty:3,text:"If it rains tomorrow, I _____ stay home.",options:["will","would","stay","stayed"],correct:0,explanation:"First conditional: if + present, will + base.",points:10},
+{topic:"Passive voice",difficulty:3,text:"The cake _____ by Mary.",options:["was made","made","is make","were made"],correct:0,explanation:"Singular subject + past passive: was made.",points:10},
+{topic:"Vocabulary - context",difficulty:2,text:"The teacher 'praised' the student means she:",options:["criticized","encouraged","ignored","punished"],correct:1,explanation:"Praise = approve, encourage.",points:10},
+{topic:"Linkers",difficulty:2,text:"It was raining, _____ we went out.",options:["because","so","but","and"],correct:2,explanation:"Contrast → 'but'.",points:10},
+{topic:"Reported speech",difficulty:3,text:"He said, 'I am tired.' → He said he _____ tired.",options:["is","was","be","were"],correct:1,explanation:"Reported speech shifts tense: is → was.",points:10},
+{topic:"Reading inference",difficulty:3,text:"\"She slammed the door and didn't say goodbye.\" She was likely:",options:["Happy","Angry","Sleeping","Sick"],correct:1,explanation:"Slamming the door suggests anger.",points:10},
+{topic:"Phrasal verbs",difficulty:2,text:"Please 'turn off' the lights means:",options:["Switch off","Turn around","Burn","Use"],correct:0,explanation:"'Turn off' = switch off.",points:10}
+],
+/* ENGLISH 4 — EXAM 2 */
+"english_4_2":[
+{topic:"Grammar - Tenses",difficulty:2,text:"By the time we arrived, the movie _____.",options:["started","had started","starts","starting"],correct:1,explanation:"Past Perfect: action before another past event.",points:10},
+{topic:"Vocabulary",difficulty:2,text:"'Generous' means:",options:["Selfish","Giving freely","Quiet","Strict"],correct:1,explanation:"Generous = willing to share.",points:10},
+{topic:"Reading",difficulty:2,text:"\"Recycling reduces waste and helps the environment.\" The main benefit of recycling is:",options:["Saving money","Helping the environment","Making jobs","Cleaning streets"],correct:1,explanation:"Text says it 'helps the environment'.",points:10},
+{topic:"Modal verbs",difficulty:3,text:"You _____ have studied — the test was easy.",options:["needn't","mustn't","can't","shouldn't"],correct:0,explanation:"'Needn't have' = it wasn't necessary.",points:10},
+{topic:"Relative clauses",difficulty:3,text:"The man _____ called you is here.",options:["which","who","whose","whom"],correct:1,explanation:"Subject + person → 'who'.",points:10},
+{topic:"Vocabulary",difficulty:2,text:"'Ancient' is closest to:",options:["Modern","Very old","New","Future"],correct:1,explanation:"Ancient = very old.",points:10},
+{topic:"Question tags",difficulty:3,text:"You like pizza, _____?",options:["don't you","aren't you","do you","won't you"],correct:0,explanation:"Affirmative statement → negative tag.",points:10},
+{topic:"Gerunds",difficulty:2,text:"She enjoys _____.",options:["read","reads","reading","to read"],correct:2,explanation:"After 'enjoy' → gerund (-ing).",points:10},
+{topic:"Reading inference",difficulty:3,text:"\"His eyes lit up when he heard the news.\" He felt:",options:["Sad","Tired","Excited","Bored"],correct:2,explanation:"'Eyes lit up' = excitement, joy.",points:10},
+{topic:"Synonyms",difficulty:2,text:"Synonym of 'difficult':",options:["Easy","Hard","Simple","Light"],correct:1,explanation:"Difficult = hard.",points:10}
+],
+/* ENGLISH 4 — EXAM 3 */
+"english_4_3":[
+{topic:"Grammar",difficulty:2,text:"If I _____ rich, I would travel.",options:["am","was","were","being"],correct:2,explanation:"Second conditional: were (subjunctive).",points:10},
+{topic:"Vocabulary",difficulty:2,text:"To 'postpone' means:",options:["cancel","delay","speed up","begin"],correct:1,explanation:"Postpone = delay to later.",points:10},
+{topic:"Reading",difficulty:2,text:"\"Vitamins are essential for health.\" 'Essential' means:",options:["unnecessary","helpful","necessary","colorful"],correct:2,explanation:"Essential = absolutely necessary.",points:10},
+{topic:"Passive",difficulty:3,text:"English _____ in many countries.",options:["speaks","is spoken","spoke","speaking"],correct:1,explanation:"Passive: is + past participle.",points:10},
+{topic:"Vocabulary",difficulty:2,text:"'Abundant' means:",options:["scarce","plentiful","empty","strange"],correct:1,explanation:"Abundant = plenty, large amount.",points:10},
+{topic:"Future forms",difficulty:2,text:"I _____ travel to Spain next summer.",options:["am going to","go","went","gone"],correct:0,explanation:"Plan/intention → 'be going to'.",points:10},
+{topic:"Articles",difficulty:2,text:"He plays _____ piano very well.",options:["a","an","the","-"],correct:2,explanation:"Musical instruments take 'the'.",points:10},
+{topic:"Phrasal verbs",difficulty:3,text:"I need to 'look into' this matter — means:",options:["look outside","investigate","look at","ignore"],correct:1,explanation:"Look into = investigate.",points:10},
+{topic:"Vocabulary",difficulty:2,text:"'Brief' means:",options:["long","short","heavy","light"],correct:1,explanation:"Brief = short in duration.",points:10},
+{topic:"Reading",difficulty:3,text:"\"Despite the rain, they continued the picnic.\" 'Despite' shows:",options:["cause","contrast","result","time"],correct:1,explanation:"Despite = even though (contrast).",points:10}
+],
+/* ENGLISH 4 — EXAM 4 */
+"english_4_4":[
+{topic:"Grammar",difficulty:3,text:"She has been studying _____ three hours.",options:["since","for","during","from"],correct:1,explanation:"Duration (3 hours) → 'for'. 'Since' for starting points.",points:10},
+{topic:"Vocabulary",difficulty:2,text:"'Cautious' means:",options:["careless","careful","brave","fast"],correct:1,explanation:"Cautious = careful.",points:10},
+{topic:"Reading",difficulty:3,text:"\"Although she was tired, she finished the marathon.\" The main idea is:",options:["She gave up","She persevered","She lost","She slept"],correct:1,explanation:"'Although tired, she finished' → perseverance.",points:10},
+{topic:"Vocabulary in context",difficulty:3,text:"\"The diamond is extremely 'valuable'.\" Valuable means:",options:["expensive","colorful","heavy","old"],correct:0,explanation:"Valuable = worth a lot.",points:10},
+{topic:"Conditional III",difficulty:3,text:"If I _____ known, I would have helped.",options:["have","had","would","did"],correct:1,explanation:"Third conditional: had + past participle.",points:10},
+{topic:"Vocabulary",difficulty:2,text:"'Reveal' means:",options:["hide","show","destroy","copy"],correct:1,explanation:"Reveal = make known, show.",points:10},
+{topic:"Linkers",difficulty:2,text:"_____ studying, he passed the exam.",options:["Because","Despite","Although","Since"],correct:0,explanation:"Cause → 'Because' (he studied so passed).",points:10},
+{topic:"Reading comprehension",difficulty:3,text:"\"Scientists discovered a new species in the Amazon.\" Where was the discovery?",options:["Europe","Amazon rainforest","Africa","Asia"],correct:1,explanation:"Stated: in the Amazon.",points:10},
+{topic:"Vocabulary",difficulty:3,text:"'Eventually' means:",options:["never","at the end","quickly","loudly"],correct:1,explanation:"Eventually = in the end, finally.",points:10},
+{topic:"Reported speech",difficulty:3,text:"She asked where I _____.",options:["live","lived","living","do live"],correct:1,explanation:"Reported question shifts to past: lived.",points:10}
+],
+/* ENGLISH 5 — EXAM 1 */
+"english_5_1":[
+{topic:"Advanced vocabulary",difficulty:3,text:"'Ubiquitous' means:",options:["rare","everywhere","ancient","beautiful"],correct:1,explanation:"Ubiquitous = present everywhere.",points:10},
+{topic:"Reading - inference",difficulty:3,text:"\"His argument lacked substance.\" His argument was:",options:["short","weak","clear","loud"],correct:1,explanation:"Lacked substance = weak, without depth.",points:10},
+{topic:"Vocabulary - academic",difficulty:3,text:"To 'mitigate' is to:",options:["worsen","reduce","measure","mediate"],correct:1,explanation:"Mitigate = make less severe.",points:10},
+{topic:"Grammar - inversion",difficulty:3,text:"Never _____ such a sight.",options:["I have seen","have I seen","I saw","do I see"],correct:1,explanation:"'Never' triggers inversion: have I seen.",points:10},
+{topic:"Vocabulary - phrasal",difficulty:3,text:"'Bring about' means:",options:["transport","cause","find","increase"],correct:1,explanation:"Bring about = cause, make happen.",points:10},
+{topic:"Reading - main idea",difficulty:3,text:"\"Climate change requires immediate global action.\" The author's stance is:",options:["unconcerned","urgent","neutral","skeptical"],correct:1,explanation:"'Immediate action' shows urgency.",points:10},
+{topic:"Synonyms",difficulty:3,text:"Synonym of 'meticulous':",options:["careless","detailed","casual","quick"],correct:1,explanation:"Meticulous = paying great attention to detail.",points:10},
+{topic:"Idiom",difficulty:3,text:"'Bite the bullet' means:",options:["eat fast","face hardship","run","laugh"],correct:1,explanation:"Idiom: endure a difficult situation.",points:10},
+{topic:"Vocabulary",difficulty:3,text:"'Inevitable' means:",options:["avoidable","unavoidable","invisible","invincible"],correct:1,explanation:"Inevitable = cannot be avoided.",points:10},
+{topic:"Composition - tone",difficulty:3,text:"A formal essay should avoid:",options:["transitions","contractions","topic sentences","examples"],correct:1,explanation:"Contractions (don't, can't) are informal.",points:10}
+],
+/* ENGLISH 5 — EXAM 2 */
+"english_5_2":[
+{topic:"Vocabulary",difficulty:3,text:"'Diligent' means:",options:["lazy","hardworking","clever","silent"],correct:1,explanation:"Diligent = hardworking, persistent.",points:10},
+{topic:"Reading",difficulty:3,text:"\"Despite extensive research, the cause remains elusive.\" 'Elusive' means:",options:["clear","hard to find","useless","old"],correct:1,explanation:"Elusive = hard to grasp or find.",points:10},
+{topic:"Advanced grammar",difficulty:3,text:"Had I known, I _____ acted differently.",options:["would","would have","will","had"],correct:1,explanation:"Third conditional inverted: would have + past participle.",points:10},
+{topic:"Vocabulary - academic",difficulty:3,text:"'Substantial' means:",options:["small","considerable","fake","light"],correct:1,explanation:"Substantial = large, significant.",points:10},
+{topic:"Phrasal",difficulty:3,text:"'Put up with' means:",options:["raise","tolerate","build","support"],correct:1,explanation:"Put up with = tolerate, endure.",points:10},
+{topic:"Reading inference",difficulty:3,text:"\"Her smile was forced.\" She was:",options:["genuinely happy","not happy","laughing","crying"],correct:1,explanation:"'Forced' smile = not real happiness.",points:10},
+{topic:"Vocabulary",difficulty:3,text:"'Tedious' means:",options:["exciting","boring","short","loud"],correct:1,explanation:"Tedious = boring, monotonous.",points:10},
+{topic:"Linkers - advanced",difficulty:3,text:"_____ his efforts, he failed.",options:["Because of","Notwithstanding","Due to","Owing to"],correct:1,explanation:"Notwithstanding = despite (contrast).",points:10},
+{topic:"Vocabulary",difficulty:3,text:"'Pragmatic' means:",options:["theoretical","practical","poetic","political"],correct:1,explanation:"Pragmatic = practical, realistic.",points:10},
+{topic:"Composition",difficulty:3,text:"Best topic sentence introduces:",options:["random fact","main idea","conclusion","example"],correct:1,explanation:"Topic sentence states the paragraph's main idea.",points:10}
+],
+/* HISTORY — EXAM 1 */
+"history_1":[
+{topic:"מלחמת העולם הראשונה",difficulty:2,text:"באיזו שנה פרצה מלחמת העולם הראשונה?",options:["1912","1914","1916","1918"],correct:1,explanation:"מלחמת העולם הראשונה פרצה ב-1914 לאחר רצח יורש העצר האוסטרי בסרייבו.",points:10},
+{topic:"ציונות",difficulty:2,text:"מי כתב את הספר 'מדינת היהודים'?",options:["דוד בן-גוריון","תיאודור הרצל","חיים ויצמן","זאב ז'בוטינסקי"],correct:1,explanation:"הספר 'מדינת היהודים' נכתב ע״י תיאודור הרצל ב-1896 ומהווה את המסד התיאורטי של הציונות המדינית.",points:10},
+{topic:"השואה",difficulty:2,text:"כמה יהודים נרצחו בשואה?",options:["3 מיליון","6 מיליון","9 מיליון","12 מיליון"],correct:1,explanation:"כ-6 מיליון יהודים נרצחו בידי הנאצים בשואה, כשליש מהעם היהודי באותה תקופה.",points:10},
+{topic:"מלחמת העצמאות",difficulty:2,text:"באיזה תאריך הוכרזה מדינת ישראל?",options:["29.11.1947","14.5.1948","15.5.1948","5.6.1967"],correct:1,explanation:"מדינת ישראל הוכרזה ב-ה' באייר תש״ח, 14 במאי 1948, על ידי דוד בן-גוריון.",points:10},
+{topic:"מהפכה צרפתית",difficulty:2,text:"מתי החלה המהפכה הצרפתית?",options:["1776","1789","1815","1848"],correct:1,explanation:"המהפכה החלה ב-1789 עם כיבוש הבסטיליה ב-14 ביולי.",points:10},
+{topic:"לאומיות",difficulty:2,text:"איזה רעיון מאפיין את הלאומיות?",options:["מלכות אבסולוטית","אומה כקבוצת זהות פוליטית","דת אחת","אריסטוקרטיה"],correct:1,explanation:"הלאומיות רואה באומה את היחידה המרכזית של זהות וריבונות פוליטית.",points:10},
+{topic:"הצהרת בלפור",difficulty:2,text:"מתי ניתנה הצהרת בלפור?",options:["1897","1917","1922","1947"],correct:1,explanation:"הצהרת בלפור ניתנה ב-2 בנובמבר 1917 והבטיחה תמיכה בריטית בהקמת בית לאומי לעם היהודי בארץ ישראל.",points:10},
+{topic:"מלחמת העולם השנייה",difficulty:2,text:"מתי הסתיימה מלחמת העולם השנייה באירופה?",options:["מאי 1944","מאי 1945","אוגוסט 1945","ספטמבר 1945"],correct:1,explanation:"המלחמה באירופה הסתיימה ב-8 במאי 1945 בכניעת גרמניה. במזרח — בספטמבר 1945.",points:10},
+{topic:"קומוניזם",difficulty:2,text:"מי הוביל את המהפכה הבולשביקית ב-1917?",options:["סטלין","לנין","טרוצקי","מרקס"],correct:1,explanation:"לנין הוביל את המהפכה הבולשביקית באוקטובר 1917 ברוסיה.",points:10},
+{topic:"חברה במאה ה-19",difficulty:3,text:"מה הביא למהפכה התעשייתית?",options:["המצאת הדפוס","המצאת מכונת הקיטור","גילוי החשמל","מלחמת העולם הראשונה"],correct:1,explanation:"מכונת הקיטור של ג'יימס וואט הייתה זרז מרכזי למהפכה התעשייתית שהחלה בבריטניה.",points:10}
+],
+/* HISTORY — EXAM 2 */
+"history_2":[
+{topic:"השואה",difficulty:2,text:"מה היה ועידת ואנזה?",options:["שחרור מחנות","תכנון 'הפתרון הסופי'","הכרזת מלחמה","הקמת גטו ורשה"],correct:1,explanation:"בוועידת ואנזה (ינואר 1942) תכננו הנאצים את ההשמדה השיטתית של יהודי אירופה.",points:10},
+{topic:"מלחמת ששת הימים",difficulty:2,text:"מתי התקיימה מלחמת ששת הימים?",options:["1956","1967","1973","1982"],correct:1,explanation:"מלחמת ששת הימים התקיימה ביוני 1967 ונסתיימה בניצחון ישראלי גדול.",points:10},
+{topic:"ציונות - זרמים",difficulty:3,text:"מי הקים את התנועה הרביזיוניסטית?",options:["הרצל","ויצמן","ז'בוטינסקי","סוקולוב"],correct:2,explanation:"זאב ז'בוטינסקי הקים את הציונות הרביזיוניסטית ב-1925 כתנגדות לציונות המעשית.",points:10},
+{topic:"מלחמת העולם הראשונה",difficulty:2,text:"מי היו המעצמות המרכזיות?",options:["צרפת ובריטניה","גרמניה ואוסטרו-הונגריה","רוסיה וארה״ב","איטליה ויפן"],correct:1,explanation:"מעצמות המרכז: גרמניה, האימפריה האוסטרו-הונגרית, האימפריה העות'מאנית, ובולגריה.",points:10},
+{topic:"חוקי נירנברג",difficulty:3,text:"מה היו חוקי נירנברג (1935)?",options:["חוקים אנטי-יהודיים בגרמניה","הסכם שלום","אמנת זכויות אדם","חוקה אמריקאית"],correct:0,explanation:"חוקי נירנברג שללו מיהודי גרמניה את אזרחותם ואסרו על נישואי תערובת.",points:10},
+{topic:"קולוניאליזם",difficulty:3,text:"מה הייתה 'ועידת ברלין' (1884-1885)?",options:["חלוקת אפריקה בין מעצמות","שלום אחרי מלחמה","הכרזת עצמאות","ביטול עבדות"],correct:0,explanation:"בוועידת ברלין חולקה אפריקה בין המעצמות האירופיות, ללא נציגות אפריקאית.",points:10},
+{topic:"ישראל - שנים ראשונות",difficulty:2,text:"מה הייתה 'מבצע קדש' (1956)?",options:["מלחמה עם סוריה","מבצע סיני","מלחמת לבנון","ההתנתקות"],correct:1,explanation:"מבצע קדש = מבצע סיני באוקטובר-נובמבר 1956, יחד עם בריטניה וצרפת נגד מצרים.",points:10},
+{topic:"קומוניזם בברה״מ",difficulty:3,text:"מתי קרסה ברית המועצות?",options:["1989","1991","1993","2000"],correct:1,explanation:"ברית המועצות התפרקה רשמית בדצמבר 1991.",points:10},
+{topic:"גלובליזציה",difficulty:3,text:"איזו תופעה מאפיינת את הגלובליזציה?",options:["הסתגרות כלכלית","שיתוף כלכלי וטכנולוגי בין מדינות","מלחמות בלבד","דת אחת"],correct:1,explanation:"גלובליזציה = תהליך של חיבור כלכלי, תרבותי וטכנולוגי בין מדינות.",points:10},
+{topic:"מלחמת העולם השנייה",difficulty:2,text:"מה היה D-Day?",options:["ניצחון על יפן","פלישת בעלות הברית לנורמנדי","פיצוץ בהירושימה","הצהרת מלחמה"],correct:1,explanation:"D-Day (6 ביוני 1944) - פלישת בעלות הברית לחופי נורמנדי בצרפת, נקודת מפנה במערב אירופה.",points:10}
+],
+/* HISTORY — EXAM 3 */
+"history_3":[
+{topic:"היסטוריה יהודית",difficulty:2,text:"מי הקים את גדודי 'נילי'?",options:["טרומפלדור","אהרון אהרונסון","ויצמן","ז'בוטינסקי"],correct:1,explanation:"רשת הריגול 'נילי' פעלה בארץ ישראל לטובת הבריטים, בהובלת אהרון אהרונסון ואחותו שרה.",points:10},
+{topic:"העלייה",difficulty:2,text:"מתי הייתה העלייה הראשונה לארץ ישראל?",options:["1840","1882","1904","1919"],correct:1,explanation:"העלייה הראשונה החלה ב-1882, בעיקר מרוסיה ורומניה, בהשפעת תנועת 'חיבת ציון'.",points:10},
+{topic:"המנדט הבריטי",difficulty:2,text:"מתי החל המנדט הבריטי בארץ ישראל?",options:["1917","1920","1922","1948"],correct:2,explanation:"המנדט הבריטי אושר על ידי חבר הלאומים ב-1922 (התחיל בפועל ב-1920).",points:10},
+{topic:"אנטישמיות",difficulty:3,text:"מה היה משפט דרייפוס?",options:["דין על קצין צרפתי-יהודי","משפט נירנברג","משפט אייכמן","הצהרת בלפור"],correct:0,explanation:"קצין צרפתי יהודי בשם אלפרד דרייפוס הואשם בריגול ב-1894. המשפט הביא לעליית הציונות.",points:10},
+{topic:"רעיון הלאום",difficulty:3,text:"מה הקשר בין הרצל לדרייפוס?",options:["היו חברים","הרצל סיקר את המשפט והושפע ממנו","היו אויבים","אין קשר"],correct:1,explanation:"הרצל סיקר את משפט דרייפוס וקרא לכתוב 'מדינת היהודים' לאור האנטישמיות שראה.",points:10},
+{topic:"מלחמת העצמאות",difficulty:2,text:"איזה הסכמים סיימו את מלחמת העצמאות?",options:["הסכמי קמפ דייוויד","הסכמי שביתת נשק רודוס","הסכם אוסלו","הסכם שלום"],correct:1,explanation:"בינואר-יולי 1949 נחתמו הסכמי שביתת נשק ברודוס בין ישראל למצרים, ירדן, סוריה ולבנון.",points:10},
+{topic:"מלחמת יום הכיפורים",difficulty:2,text:"מתי פרצה מלחמת יום הכיפורים?",options:["6.6.1967","6.10.1973","5.6.1982","2.8.1990"],correct:1,explanation:"מלחמת יום הכיפורים פרצה ב-6 באוקטובר 1973, בתקיפת פתע סורית ומצרית.",points:10},
+{topic:"שואה - גטאות",difficulty:3,text:"מה היה מרד גטו ורשה?",options:["1939","1941","1943","1945"],correct:2,explanation:"מרד גטו ורשה החל בערב פסח, 19 באפריל 1943, ונמשך כחודש. הראשון מסוגו.",points:10},
+{topic:"שואה - חסידי אומות העולם",difficulty:3,text:"מי הייתה חנה סנש?",options:["מנהיגה ביישוב","צנחנית שנפלה בשבי","פסיכולוגית","שגרירה"],correct:1,explanation:"חנה סנש הייתה צנחנית מארץ ישראל לאירופה במלחמה, נתפסה בידי הנאצים והוצאה להורג.",points:10},
+{topic:"רעיון הדמוקרטיה",difficulty:3,text:"איזה אירוע ב-1789 השפיע על הדמוקרטיה המודרנית?",options:["מהפכה אמריקאית","מהפכה צרפתית","מהפכה תעשייתית","מהפכת אוקטובר"],correct:1,explanation:"המהפכה הצרפתית הציבה את הצהרת זכויות האדם והאזרח כיסוד דמוקרטי מודרני.",points:10}
+],
+/* HISTORY — EXAM 4 */
+"history_4":[
+{topic:"השואה",difficulty:3,text:"מה היה 'ליל הבדולח' (1938)?",options:["מצעד נאצי","פוגרום מאורגן ביהודי גרמניה","הסכם שלום","מהפכה"],correct:1,explanation:"ליל הבדולח (9-10 בנובמבר 1938) - פוגרום מאורגן בו נשרפו בתי כנסת ועסקים יהודיים בגרמניה.",points:10},
+{topic:"ציונות",difficulty:2,text:"איפה התקיים הקונגרס הציוני הראשון?",options:["וינה","באזל","ברלין","ירושלים"],correct:1,explanation:"הקונגרס הציוני הראשון התקיים בבאזל, שווייץ, באוגוסט 1897.",points:10},
+{topic:"מלחמת לבנון",difficulty:2,text:"מתי פרצה מלחמת לבנון הראשונה?",options:["1973","1978","1982","1987"],correct:2,explanation:"מלחמת לבנון הראשונה ('מבצע שלום הגליל') פרצה ב-6 ביוני 1982.",points:10},
+{topic:"היסטוריה כללית",difficulty:3,text:"מה הייתה 'תורת מונרו' (1823)?",options:["אזהרה לאירופה לא להתערב באמריקה","הסכם סחר","ביטול עבדות","הצהרת מלחמה"],correct:0,explanation:"דוקטרינת מונרו הצהירה שכל התערבות אירופית באמריקה תיחשב מעשה אגרסיבי כלפי ארה״ב.",points:10},
+{topic:"מלחמת העולם הראשונה - גורמים",difficulty:3,text:"מה הצית את מלחמת העולם הראשונה?",options:["פלישה לפולין","רצח יורש העצר האוסטרי","שריפת רומא","מבצע נירנברג"],correct:1,explanation:"רצח יורש העצר האוסטרי פרנץ פרדיננד ב-28 ביוני 1914 בסרייבו הצית את שרשרת ההתחייבויות שהובילה למלחמה.",points:10},
+{topic:"ההגנה והפלמ\"ח",difficulty:2,text:"מי הקים את הפלמ\"ח?",options:["אצ\"ל","ההגנה","לח\"י","המוסד"],correct:1,explanation:"הפלמ\"ח (פלוגות המחץ) נוסד ב-1941 כזרוע מצוקת של ההגנה.",points:10},
+{topic:"שואה - גירוש",difficulty:3,text:"מה היה 'משאל ואנזה' (1942)?",options:["משאל עם","תכנון 'הפתרון הסופי' של יהודי אירופה","ביטול אזרחות","הסכם"],correct:1,explanation:"בוועידת ואנזה (ינואר 1942) תוכנן הביצוע השיטתי של רצח יהודי אירופה.",points:10},
+{topic:"ציונות מעשית",difficulty:3,text:"מי כתב את 'אלטנוילנד'?",options:["אחד העם","הרצל","ביאליק","ביאליסטוק"],correct:1,explanation:"'אלטנוילנד' (1902) הוא רומן אוטופי של הרצל המתאר את מדינת היהודים העתידית.",points:10},
+{topic:"דמוקרטיה ישראלית",difficulty:2,text:"מי היה נשיא ישראל הראשון?",options:["דוד בן-גוריון","חיים ויצמן","יצחק בן-צבי","משה שרת"],correct:1,explanation:"חיים ויצמן היה הנשיא הראשון של מדינת ישראל (1949-1952).",points:10},
+{topic:"גלובליזציה - הקפאת המלחמה",difficulty:3,text:"מה הייתה 'המלחמה הקרה'?",options:["מלחמה צבאית באירופה","עימות אידיאולוגי בין ארה״ב לברה״מ","מלחמת מים","שביתה"],correct:1,explanation:"המלחמה הקרה (1947-1991) - עימות אידיאולוגי וגיאופוליטי בין הגוש המערבי בראשות ארה״ב לבין הגוש הקומוניסטי בראשות ברה״מ.",points:10}
+],
+/* CIVICS — EXAM 1 */
+"civics_1":[
+{topic:"דמוקרטיה",difficulty:1,text:"מהו עיקרון יסוד של דמוקרטיה?",options:["שלטון של אחד","שלטון העם","שלטון הצבא","שלטון הדת"],correct:1,explanation:"דמוקרטיה (יוונית: 'שלטון העם') - העם הוא הריבון.",points:10},
+{topic:"חוקי יסוד",difficulty:2,text:"כמה חוקי יסוד יש בישראל (2024)?",options:["9","11","13","15"],correct:2,explanation:"בישראל 13 חוקי יסוד שמהווים את החוקה החלקית.",points:10},
+{topic:"רשויות השלטון",difficulty:2,text:"מה תפקיד הרשות המחוקקת בישראל?",options:["לאכוף חוקים","לחוקק חוקים","לדון בעבירות","למנות שופטים"],correct:1,explanation:"הרשות המחוקקת (הכנסת) מחוקקת את החוקים.",points:10},
+{topic:"הפרדת רשויות",difficulty:2,text:"מה זה 'הפרדת רשויות'?",options:["מפלגות נפרדות","הפרדה בין ביצוע, חקיקה ושפיטה","הפרדה בין דת ומדינה","קונפדרציה"],correct:1,explanation:"הפרדת רשויות = הפרדה בין הרשות המחוקקת (כנסת), המבצעת (ממשלה) והשופטת (בתי משפט).",points:10},
+{topic:"זכויות אדם",difficulty:2,text:"מהי 'זכות יסוד'?",options:["זכות שניתן לבטל","זכות הניתנת לכל אדם באשר הוא אדם","זכות כלכלית בלבד","זכות חברתית בלבד"],correct:1,explanation:"זכויות יסוד = זכויות טבעיות ובסיסיות לכל בני אנוש (חיים, חירות, כבוד).",points:10},
+{topic:"מגילת העצמאות",difficulty:1,text:"מתי הוקראה מגילת העצמאות?",options:["29.11.1947","14.5.1948","5.5.1949","5.6.1967"],correct:1,explanation:"מגילת העצמאות הוקראה על ידי דוד בן-גוריון ב-14 במאי 1948 (ה' באייר תש״ח).",points:10},
+{topic:"הכנסת",difficulty:1,text:"כמה חברי כנסת יש בישראל?",options:["100","110","120","150"],correct:2,explanation:"בכנסת 120 חברי כנסת.",points:10},
+{topic:"שיטת בחירות",difficulty:2,text:"מהי שיטת הבחירות בישראל?",options:["רובנית","יחסית","מעורבת","ישירה"],correct:1,explanation:"בישראל שיטת בחירות יחסית - מספר המנדטים נקבע לפי אחוז הקולות.",points:10},
+{topic:"בית המשפט העליון",difficulty:2,text:"מה תפקיד 'בג\"ץ'?",options:["משפט פלילי","משפט אזרחי","ביקורת שיפוטית על השלטון","בית משפט שלום"],correct:2,explanation:"בג\"ץ (בית הדין הגבוה לצדק) דן בעתירות נגד רשויות השלטון.",points:10},
+{topic:"זכות הצבעה",difficulty:1,text:"מאיזה גיל בישראל מותר להצביע לכנסת?",options:["16","17","18","21"],correct:2,explanation:"גיל הבחירה לכנסת הוא 18.",points:10}
+],
+/* CIVICS — EXAM 2 */
+"civics_2":[
+{topic:"הממשלה",difficulty:2,text:"מי בוחר את ראש הממשלה בישראל?",options:["העם ישירות","הנשיא","הכנסת (אמון)","בג\"ץ"],correct:2,explanation:"ראש הממשלה מורכב על ידי חבר הכנסת שזוכה לרוב מתוך 120 ולקבל אמון הכנסת.",points:10},
+{topic:"אזרחות",difficulty:2,text:"מה זה 'חוק השבות'?",options:["חוק עליה","חוק שמאפשר ליהודי לעלות לישראל ולקבל אזרחות","חוק חירום","חוק יסוד"],correct:1,explanation:"חוק השבות (1950) קובע זכות של כל יהודי לעלות לישראל ולקבל אזרחות.",points:10},
+{topic:"דמוקרטיה - עקרונות",difficulty:2,text:"איזה עיקרון אינו חלק מדמוקרטיה?",options:["שלטון העם","בחירות חופשיות","שלטון יחיד","שלטון החוק"],correct:2,explanation:"שלטון יחיד = דיקטטורה, ההפך מדמוקרטיה.",points:10},
+{topic:"זכויות אדם",difficulty:2,text:"איזו מהזכויות היא 'זכות אזרחית'?",options:["זכות לחינוך","חופש הביטוי","זכות לדיור","זכות לבריאות"],correct:1,explanation:"זכויות אזרחיות = זכויות פוליטיות בסיסיות (ביטוי, התאגדות, אזרחות). זכויות חברתיות = חינוך, דיור, בריאות.",points:10},
+{topic:"חוק יסוד: כבוד האדם וחירותו",difficulty:3,text:"באיזו שנה נחקק חוק יסוד: כבוד האדם וחירותו?",options:["1948","1958","1992","2000"],correct:2,explanation:"חוק יסוד: כבוד האדם וחירותו נחקק ב-1992 ומהווה חלק מ'המהפכה החוקתית'.",points:10},
+{topic:"דמוקרטיה דיונית",difficulty:3,text:"מהי 'דמוקרטיה הסכמית' (קונסוציונלית)?",options:["שלטון רוב מוחלט","שיטה לאיחוד בין קבוצות שונות באמצעות הסכמות","דיקטטורה","מונרכיה"],correct:1,explanation:"דמוקרטיה הסכמית = שיטה המאפשרת חיים משותפים של קבוצות שונות באמצעות הסכמות (דוגמת שווייץ, בלגיה).",points:10},
+{topic:"רשות שופטת",difficulty:2,text:"מי ממנה שופטים בישראל?",options:["ראש הממשלה","הנשיא לפי המלצה","הכנסת","ועדה לבחירת שופטים"],correct:3,explanation:"שופטים נבחרים על ידי הוועדה לבחירת שופטים, בראשות שר המשפטים.",points:10},
+{topic:"חקיקה",difficulty:2,text:"כמה קריאות נדרשות להעברת חוק בכנסת?",options:["2","3","4","קריאה אחת"],correct:1,explanation:"חוק עובר 3 קריאות בכנסת: ראשונה (עקרונית), שנייה ושלישית (פרטנית).",points:10},
+{topic:"זכות הצבעה",difficulty:1,text:"כל כמה זמן נערכות בחירות בישראל?",options:["שנתיים","ארבע שנים","חמש שנים","שבע שנים"],correct:1,explanation:"כהונת הכנסת בישראל היא 4 שנים (אך הבחירות יכולות להיות מוקדמות).",points:10},
+{topic:"זכויות מיעוטים",difficulty:3,text:"מהי 'דמוקרטיה רב-תרבותית'?",options:["שלטון יחיד","דמוקרטיה המכירה בקבוצות תרבותיות שונות","אנרכיה","דיקטטורה"],correct:1,explanation:"דמוקרטיה רב-תרבותית מכירה בזכויות של קבוצות תרבותיות לשמר את זהותן.",points:10}
+],
+/* CIVICS — EXAM 3 */
+"civics_3":[
+{topic:"מגילת העצמאות",difficulty:2,text:"מה הוצהר במגילת העצמאות לגבי שוויון?",options:["אין שוויון","שוויון זכויות לכל אזרח","רק יהודים","רק גברים"],correct:1,explanation:"מגילת העצמאות מצהירה על שוויון זכויות חברתי ומדיני לכל אזרחיה ללא הבדל דת, גזע או מין.",points:10},
+{topic:"רשויות מקומיות",difficulty:2,text:"מי עומד בראש עירייה?",options:["מושל","ראש עיר","שר","נציב"],correct:1,explanation:"ראש עיר נבחר בבחירות ישירות על ידי תושבי העיר.",points:10},
+{topic:"עקרונות דמוקרטיה",difficulty:2,text:"מה זה 'שלטון החוק'?",options:["שלטון רוב","הכפפת כולם, כולל השלטון, לחוק","שלטון יחיד","שלטון בלי חוק"],correct:1,explanation:"שלטון החוק = כל אחד, כולל הרשויות, כפוף לחוק.",points:10},
+{topic:"מפלגות",difficulty:2,text:"מהו 'אחוז החסימה' בישראל (2024)?",options:["1%","2.5%","3.25%","5%"],correct:2,explanation:"אחוז החסימה לכנסת הוא 3.25% מהקולות הכשרים.",points:10},
+{topic:"הנשיא",difficulty:2,text:"מי בוחר את נשיא ישראל?",options:["העם","הכנסת","הממשלה","בג\"ץ"],correct:1,explanation:"נשיא ישראל נבחר על ידי הכנסת לכהונה של 7 שנים.",points:10},
+{topic:"חופש הביטוי",difficulty:3,text:"חופש הביטוי בישראל מוגבל על ידי:",options:["אסון","חוק לשון הרע, הסתה, פגיעה בביטחון","אזרחות","דת"],correct:1,explanation:"חופש הביטוי אינו מוחלט - מוגבל לשם הגנה על מוניטין, ביטחון המדינה ומניעת הסתה.",points:10},
+{topic:"מדינה יהודית ודמוקרטית",difficulty:3,text:"מה זה 'מדינה יהודית ודמוקרטית'?",options:["סתירה מוחלטת","שילוב של זהות יהודית עם ערכים דמוקרטיים","רק יהודית","רק דמוקרטית"],correct:1,explanation:"לפי חוקי היסוד, ישראל מוגדרת כמדינה יהודית ודמוקרטית - שילוב של שני הערכים.",points:10},
+{topic:"חברי כנסת",difficulty:2,text:"מה זה 'חסינות חברי כנסת'?",options:["משכורת","הגנה משפטית בנושאים מסוימים","חניית רכב","שכר טרחה"],correct:1,explanation:"חסינות חברי כנסת = הגנה משפטית הנוגעת למילוי תפקידם, כדי לאפשר עבודה ללא חשש.",points:10},
+{topic:"אזרחות",difficulty:2,text:"איך מקבלים אזרחות ישראלית?",options:["רק בלידה","שבות, לידה, התאזרחות, או נישואים","קנייה","הצבעה"],correct:1,explanation:"דרכים לאזרחות: לידה (להורים אזרחים), שבות (יהודי), התאזרחות, ולאחרונה אישור על נישואים.",points:10},
+{topic:"בקרה ופיקוח",difficulty:3,text:"מה תפקיד מבקר המדינה?",options:["שופט","פיקוח על הרשויות וכספי ציבור","שר","ראש משטרה"],correct:1,explanation:"מבקר המדינה מבקר את התנהלות הרשויות והשימוש בכספי הציבור.",points:10}
+],
+/* CIVICS — EXAM 4 */
+"civics_4":[
+{topic:"חוקי יסוד",difficulty:3,text:"חוק יסוד: הכנסת קובע:",options:["שכר חברי כנסת","תפקיד וסמכויות הכנסת","חוקי דת","תקציב"],correct:1,explanation:"חוק יסוד: הכנסת (1958) - מסדיר את תפקיד הכנסת, הרכבה, אופן בחירתה וסמכויותיה.",points:10},
+{topic:"דמוקרטיה",difficulty:2,text:"מי מציע 'דמוקרטיה כשלטון העם, על ידי העם, למען העם'?",options:["וושינגטון","לינקולן","ג'פרסון","מדיסון"],correct:1,explanation:"אמירה מפורסמת של אברהם לינקולן בנאום גטיסבורג (1863).",points:10},
+{topic:"שוויון",difficulty:2,text:"מה זה 'אפליה מתקנת'?",options:["העדפה לטובת חזקים","אפליה לטובת קבוצה היסטורית מוחלשת לקידום שוויון","הפליה רעה","חוסר שוויון"],correct:1,explanation:"אפליה מתקנת = העדפה זמנית לקבוצות מוחלשות (נשים, מיעוטים) להשגת שוויון.",points:10},
+{topic:"רשות מבצעת",difficulty:2,text:"כמה משרדי ממשלה יש בישראל בערך?",options:["10","20","30","50"],correct:2,explanation:"בישראל יש כ-30 משרדי ממשלה, מספר משתנה לפי הקואליציה.",points:10},
+{topic:"בית המשפט",difficulty:3,text:"מה זה 'ביקורת שיפוטית'?",options:["פיקוח על המשטרה","סמכות לבדוק חוקתיות חוקים","בית סוהר","חינוך משפטי"],correct:1,explanation:"ביקורת שיפוטית - סמכות בג\"ץ לבטל חוקים הסותרים את חוקי היסוד.",points:10},
+{topic:"חופש דת",difficulty:2,text:"כיצד מוגן חופש הדת בישראל?",options:["אינו מוגן","במגילת העצמאות וחוקי יסוד","רק במשפט","ע״י הצבא"],correct:1,explanation:"חופש הדת מוגן במגילת העצמאות ובחוק יסוד: כבוד האדם וחירותו.",points:10},
+{topic:"דמוקרטיה ייצוגית",difficulty:2,text:"מה היא דמוקרטיה ייצוגית?",options:["העם מצביע ישירות","העם בוחר נציגים שמחליטים","ללא בחירות","משטר פיאודלי"],correct:1,explanation:"דמוקרטיה ייצוגית = העם בוחר נציגים (חברי כנסת) שמייצגים אותו בהחלטות.",points:10},
+{topic:"זכויות חברתיות",difficulty:3,text:"איזו זכות נחשבת 'זכות חברתית'?",options:["חופש ביטוי","זכות לחינוך","זכות הצבעה","חופש דת"],correct:1,explanation:"זכויות חברתיות = חינוך, בריאות, דיור, עבודה. זכויות הצבעה וחופש ביטוי - אזרחיות.",points:10},
+{topic:"קואליציה ואופוזיציה",difficulty:2,text:"מה זה קואליציה?",options:["מפלגה אחת","איחוד מפלגות שמקים ממשלה","אופוזיציה","חוק"],correct:1,explanation:"קואליציה = איחוד של מפלגות בעלות רוב בכנסת המקימות יחד ממשלה.",points:10},
+{topic:"זכויות אדם בעולם",difficulty:3,text:"מתי אומצה ההצהרה האוניברסלית של זכויות האדם?",options:["1945","1948","1967","1990"],correct:1,explanation:"ההצהרה האוניברסלית של זכויות האדם אומצה על ידי האו\"ם ב-10 בדצמבר 1948.",points:10}
+],
+/* BIBLE — EXAM 1 */
+"bible_1":[
+{topic:"בראשית",difficulty:1,text:"מי היה הבן הבכור של אדם וחוה?",options:["הבל","קין","שת","נח"],correct:1,explanation:"קין היה הבן הבכור, הבל הצעיר ממנו. קין רצח את הבל.",points:10},
+{topic:"בראשית - נח",difficulty:1,text:"כמה ימים ירדו גשמי המבול?",options:["7","30","40","100"],correct:2,explanation:"לפי הכתוב: 'ויהי הגשם על הארץ ארבעים יום וארבעים לילה' (בראשית ז, יב).",points:10},
+{topic:"אברהם",difficulty:2,text:"כמה היה אברהם כשנולד יצחק?",options:["75","85","100","120"],correct:2,explanation:"אברהם היה בן 100 כשנולד יצחק (בראשית כא, ה).",points:10},
+{topic:"יציאת מצרים",difficulty:2,text:"כמה מכות הוכו המצרים?",options:["7","10","12","40"],correct:1,explanation:"עשר מכות מצרים: דם, צפרדע, כינים, ערוב, דבר, שחין, ברד, ארבה, חושך, מכת בכורות.",points:10},
+{topic:"מתן תורה",difficulty:2,text:"על איזה הר ניתנה התורה?",options:["הר הזיתים","הר סיני","הר תבור","הר חרמון"],correct:1,explanation:"התורה ניתנה על הר סיני (שמות יט).",points:10},
+{topic:"דמויות",difficulty:2,text:"מי הוביל את עם ישראל לאחר מות משה?",options:["אהרון","יהושע","דוד","שמואל"],correct:1,explanation:"יהושע בן נון הוביל את העם לארץ ישראל לאחר מות משה.",points:10},
+{topic:"מלכים",difficulty:2,text:"מי היה המלך הראשון של ישראל?",options:["דוד","שאול","שלמה","שמואל"],correct:1,explanation:"שאול בן קיש היה המלך הראשון של ישראל, נמשח על ידי שמואל הנביא.",points:10},
+{topic:"דוד ושלמה",difficulty:2,text:"מי בנה את בית המקדש הראשון?",options:["דוד","שלמה","עזרא","נחמיה"],correct:1,explanation:"שלמה בנה את בית המקדש הראשון, לאחר שדוד אביו לא הורשה לבנותו.",points:10},
+{topic:"נביאים",difficulty:2,text:"מי היה הנביא בימי אחאב?",options:["ישעיהו","אליהו","ירמיהו","יחזקאל"],correct:1,explanation:"אליהו הנביא פעל בממלכת ישראל בימי המלך אחאב ואשתו איזבל.",points:10},
+{topic:"מגילת אסתר",difficulty:2,text:"מי היה אחשוורוש?",options:["מלך מצרים","מלך פרס","מלך אשור","מלך בבל"],correct:1,explanation:"אחשוורוש היה מלך פרס. במגילת אסתר מסופר על נסיון המן להשמיד את היהודים בממלכתו.",points:10}
+],
+/* BIBLE — EXAM 2 */
+"bible_2":[
+{topic:"בראשית",difficulty:2,text:"כמה בנים היו ליעקב?",options:["10","11","12","14"],correct:2,explanation:"ליעקב היו 12 בנים שהם אבות שבטי ישראל.",points:10},
+{topic:"יוסף",difficulty:2,text:"איפה נמכר יוסף לעבד?",options:["מצרים","בבל","אשור","פרס"],correct:0,explanation:"אחיו של יוסף מכרו אותו לישמעאלים שלקחו אותו למצרים (בראשית לז).",points:10},
+{topic:"שמות",difficulty:2,text:"כמה שנים היה עם ישראל במצרים?",options:["100","210","400","430"],correct:3,explanation:"לפי הכתוב, ישבו במצרים 430 שנה (שמות יב, מ).",points:10},
+{topic:"מדבר",difficulty:2,text:"כמה שנים היו ישראל במדבר?",options:["7","20","40","70"],correct:2,explanation:"בני ישראל היו 40 שנה במדבר עד שנכנסו לארץ.",points:10},
+{topic:"דוד המלך",difficulty:2,text:"את מי הרג דוד בקלע?",options:["שאול","גלית","אבנר","שמשון"],correct:1,explanation:"דוד הצעיר הרג את גלית הפלשתי בקלע ובאבן (שמואל א, יז).",points:10},
+{topic:"שלמה - חכמה",difficulty:2,text:"מה ביקש שלמה מאלוהים?",options:["עושר","חכמה","ניצחון","חיים ארוכים"],correct:1,explanation:"שלמה ביקש לב חכם לשפוט את העם. ה' נתן לו גם עושר וכבוד (מלכים א, ג).",points:10},
+{topic:"חורבן",difficulty:3,text:"מי החריב את בית המקדש הראשון?",options:["יוונים","רומאים","בבלים","פרסים"],correct:2,explanation:"נבוכדנאצר מלך בבל החריב את בית המקדש הראשון ב-586 לפנה\"ס.",points:10},
+{topic:"שיבת ציון",difficulty:3,text:"מי איפשר ליהודים לשוב מבבל?",options:["אחשוורוש","כורש","דריוש","תיגלת"],correct:1,explanation:"כורש מלך פרס פרסם הצהרה (538 לפנה\"ס) שאיפשרה ליהודים לשוב לארץ ישראל ולבנות את המקדש.",points:10},
+{topic:"מגילות",difficulty:2,text:"באיזה חג קוראים מגילת אסתר?",options:["פסח","סוכות","פורים","שבועות"],correct:2,explanation:"מגילת אסתר נקראת בחג פורים, המציין את נס הצלת היהודים בפרס.",points:10},
+{topic:"נביאים אחרונים",difficulty:3,text:"מי הוא 'נביא הזעם'?",options:["ירמיהו","יחזקאל","הושע","עמוס"],correct:0,explanation:"ירמיהו זכה לכינוי 'נביא הזעם' בשל נבואות החורבן הקשות שניבא לפני חורבן בית ראשון.",points:10}
+],
+/* CS 3 — EXAM 1 */
+"cs_3_1":[
+{topic:"משתנים",difficulty:1,text:"מה ההצהרה הנכונה לאתחול משתנה ב-Python?",options:["int x = 5","x = 5","x := 5","var x = 5"],correct:1,explanation:"ב-Python: x = 5 (ללא הצהרת טיפוס).",points:10},
+{topic:"לולאות",difficulty:1,text:"כמה פעמים תרוץ הלולאה: for i in range(5):",options:["4","5","6","אינסוף"],correct:1,explanation:"range(5) יוצר 0,1,2,3,4 — 5 איטרציות.",points:10},
+{topic:"רשימות",difficulty:2,text:"מה תוצאת len([1,2,3,4])?",options:["3","4","5","Error"],correct:1,explanation:"len() מחזירה את אורך הרשימה — 4.",points:10},
+{topic:"תנאים",difficulty:1,text:"מה התנאי שיבדוק 'x גדול מ-10 וקטן מ-20'?",options:["10 < x < 20","x > 10 or x < 20","x > 10 and x < 20","שניהם א ו-ג"],correct:3,explanation:"ב-Python גם '10 < x < 20' וגם 'x > 10 and x < 20' עובדים.",points:10},
+{topic:"פונקציות",difficulty:2,text:"מה תחזיר הפונקציה?\ndef f(x): return x*2",options:["x","x*2","2","ערך פי 2 של הפרמטר"],correct:3,explanation:"מחזירה את הקלט כפול 2.",points:10},
+{topic:"מחרוזות",difficulty:1,text:"מה תוצאת 'abc' + 'def'?",options:["'abcdef'","'abc def'","Error","6"],correct:0,explanation:"חיבור מחרוזות: 'abc' + 'def' = 'abcdef'.",points:10},
+{topic:"טיפוסי נתונים",difficulty:1,text:"איזה טיפוס הוא 3.14?",options:["int","float","str","bool"],correct:1,explanation:"מספרים עם נקודה עשרונית הם float.",points:10},
+{topic:"input",difficulty:2,text:"איזה טיפוס מחזיר input()?",options:["int","float","str","bool"],correct:2,explanation:"input() תמיד מחזיר string (מחרוזת).",points:10},
+{topic:"מערכים",difficulty:2,text:"כיצד גישים לאיבר הראשון ב-arr?",options:["arr[1]","arr[0]","arr.first","arr(0)"],correct:1,explanation:"אינדקסים מתחילים מ-0 ב-Python.",points:10},
+{topic:"רקורסיה - בסיס",difficulty:3,text:"מה ערך f(2)?\ndef f(n):\n  if n==0: return 1\n  return n*f(n-1)",options:["1","2","4","6"],correct:1,explanation:"f(2) = 2·f(1) = 2·1·f(0) = 2·1·1 = 2.",points:10}
+],
+/* CS 3 — EXAM 2 */
+"cs_3_2":[
+{topic:"לולאות",difficulty:2,text:"מה תוצאה?\nfor i in range(3): print(i, end=' ')",options:["1 2 3","0 1 2","0 1 2 3","1 2"],correct:1,explanation:"range(3) → 0,1,2.",points:10},
+{topic:"מערכים - sum",difficulty:2,text:"sum([1,2,3,4,5]) =",options:["10","15","20","5"],correct:1,explanation:"1+2+3+4+5 = 15.",points:10},
+{topic:"בוליאני",difficulty:2,text:"not (True and False)",options:["True","False","Error","None"],correct:0,explanation:"True and False = False. not False = True.",points:10},
+{topic:"מילון",difficulty:2,text:"d = {'a':1, 'b':2}; len(d) =",options:["1","2","4","Error"],correct:1,explanation:"מילון עם 2 זוגות → len = 2.",points:10},
+{topic:"מחרוזות",difficulty:2,text:"'hello'.upper() = ?",options:["'hello'","'HELLO'","'Hello'","Error"],correct:1,explanation:".upper() ממיר לאותיות גדולות.",points:10},
+{topic:"חיתוך מחרוזת",difficulty:2,text:"'python'[1:4] = ?",options:["'pyt'","'yth'","'ytho'","'pyth'"],correct:1,explanation:"אינדקסים 1,2,3 = 'yth'.",points:10},
+{topic:"לולאה while",difficulty:3,text:"כמה פעמים תרוץ?\ni=0\nwhile i<3: i+=1",options:["2","3","4","אינסוף"],correct:1,explanation:"i=0→1→2→3. כשi=3, התנאי נכשל. 3 איטרציות.",points:10},
+{topic:"תנאי if-else",difficulty:1,text:"מה ידפיס?\nx=5\nif x>3: print('A')\nelse: print('B')",options:["A","B","AB","שגיאה"],correct:0,explanation:"5>3 נכון → ידפיס A.",points:10},
+{topic:"רקורסיה",difficulty:3,text:"מה תחזיר f(4) של חזקה?\ndef f(n): return 1 if n==0 else 2*f(n-1)",options:["8","16","32","4"],correct:1,explanation:"f(4) = 2^4 = 16.",points:10},
+{topic:"מערכים דו מימדיים",difficulty:3,text:"כמה איברים יש ב-[[1,2],[3,4],[5,6]]?",options:["3","6","9","2"],correct:1,explanation:"3 שורות × 2 עמודות = 6 איברים.",points:10}
+],
+/* CS 5 — EXAM 1 */
+"cs_5_1":[
+{topic:"סיבוכיות",difficulty:3,text:"סיבוכיות מיון בועות (bubble sort)?",options:["O(n)","O(log n)","O(n log n)","O(n²)"],correct:3,explanation:"Bubble sort = O(n²) במקרה הגרוע והממוצע.",points:10},
+{topic:"מבני נתונים",difficulty:2,text:"איזה מבנה מתאים לביצוע 'undo'?",options:["Queue","Stack","Tree","Graph"],correct:1,explanation:"Stack (LIFO) - האחרון נכנס ראשון יוצא. מתאים ל-undo.",points:10},
+{topic:"רקורסיה",difficulty:3,text:"f(6) של פיבונאצ'י (0,1,1,2,3,5,8,...)?",options:["5","8","13","21"],correct:1,explanation:"fib(6) = 8.",points:10},
+{topic:"חיפוש בינארי",difficulty:3,text:"כמה השוואות לכל היותר במערך 1024 איברים?",options:["10","20","32","1024"],correct:0,explanation:"log₂(1024) = 10.",points:10},
+{topic:"מיון מהיר",difficulty:3,text:"סיבוכיות QuickSort ממוצעת?",options:["O(n)","O(n log n)","O(n²)","O(log n)"],correct:1,explanation:"QuickSort = O(n log n) בממוצע.",points:10},
+{topic:"עצים",difficulty:3,text:"בעץ בינארי מאוזן עם 15 צמתים, מהו עומק?",options:["3","4","8","15"],correct:0,explanation:"עץ מאוזן עם 15 צמתים = 4 רמות, עומק 3 (אם שורש=0).",points:10},
+{topic:"מבני נתונים",difficulty:3,text:"מה הסיבוכיות של push ב-stack?",options:["O(1)","O(log n)","O(n)","O(n²)"],correct:0,explanation:"Push ב-stack = O(1) - פעולה קבועה.",points:10},
+{topic:"OOP",difficulty:2,text:"מה זה encapsulation?",options:["ירושה","הסתרת מידע","פולימורפיזם","הפשטה"],correct:1,explanation:"Encapsulation = הסתרת מידע (היא תכונה של מחלקה).",points:10},
+{topic:"גרפים",difficulty:3,text:"איזה אלגוריתם מוצא מסלול קצר ביותר במשקלים חיוביים?",options:["DFS","BFS","Dijkstra","Bubble"],correct:2,explanation:"Dijkstra - מסלול קצר ביותר במשקלים חיוביים.",points:10},
+{topic:"hash table",difficulty:3,text:"סיבוכיות גישה ממוצעת ל-hash table?",options:["O(1)","O(log n)","O(n)","O(n²)"],correct:0,explanation:"Hash table = O(1) ממוצע.",points:10}
+],
+/* CS 5 — EXAM 2 */
+"cs_5_2":[
+{topic:"מיון",difficulty:3,text:"סיבוכיות MergeSort?",options:["O(n)","O(n log n)","O(n²)","O(log n)"],correct:1,explanation:"MergeSort = O(n log n) תמיד.",points:10},
+{topic:"מבני נתונים",difficulty:2,text:"איזה מבנה זה FIFO?",options:["Stack","Queue","Tree","Hash"],correct:1,explanation:"Queue (FIFO) - First In First Out.",points:10},
+{topic:"רקורסיה",difficulty:3,text:"בעיית מגדלי האנוי - מהי הסיבוכיות?",options:["O(n)","O(n²)","O(2^n)","O(log n)"],correct:2,explanation:"מגדלי האנוי = O(2^n).",points:10},
+{topic:"מבני נתונים - עצים",difficulty:3,text:"מה מאפיין BST?",options:["שמאל קטן","שמאל קטן וימין גדול מהשורש","ימין קטן","אין סדר"],correct:1,explanation:"BST: שמאל < שורש < ימין.",points:10},
+{topic:"OOP",difficulty:3,text:"מה הוא polymorphism?",options:["יכולת אובייקטים מטיפוסים שונים להגיב לאותה פעולה","שכפול","הירשה","הפרדה"],correct:0,explanation:"פולימורפיזם = יכולת אובייקטים שונים להגיב לאותה הודעה.",points:10},
+{topic:"רשימה מקושרת",difficulty:3,text:"סיבוכיות הוספה לראש רשימה מקושרת:",options:["O(1)","O(log n)","O(n)","O(n²)"],correct:0,explanation:"הוספה לראש = O(1) - רק שינוי מצביעים.",points:10},
+{topic:"גרפים - BFS",difficulty:3,text:"BFS משתמש ב:",options:["Stack","Queue","Tree","Hash"],correct:1,explanation:"BFS = חיפוש לרוחב, משתמש ב-Queue.",points:10},
+{topic:"דינמיקה",difficulty:3,text:"מה זה Dynamic Programming?",options:["תכנות אובייקטים","פתרון בעיות בעזרת תת-בעיות חופפות","תכנון רשת","תכנון חומרה"],correct:1,explanation:"DP = פירוק לתת-בעיות חוזרות עם שמירת תוצאות.",points:10},
+{topic:"סיבוכיות מקום",difficulty:3,text:"סיבוכיות מקום של מיון מיזוג (MergeSort):",options:["O(1)","O(log n)","O(n)","O(n²)"],correct:2,explanation:"MergeSort דורש מקום נוסף בגודל O(n) למיזוג.",points:10},
+{topic:"hash collisions",difficulty:3,text:"מה זה collision ב-hash table?",options:["שגיאת קוד","שני מפתחות מקבלים אותו אינדקס","חיתוך","קצה הזיכרון"],correct:1,explanation:"Collision = שני מפתחות שונים שמופו לאותו אינדקס.",points:10}
+]
+};
+
+/* === EXAM CONFIG === */
+const EXAM_CONFIG = {
+ math_3:{time:120}, math_4:{time:120}, math_5:{time:180},
+ english_3:{time:150}, english_4:{time:150}, english_5:{time:150},
+ history:{time:120}, civics:{time:120}, bible:{time:120},
+ cs_3:{time:180}, cs_5:{time:180}
+};
+const EXAM_LABELS=[
+ {n:1,name:"סגנון מועד א׳ 2024"},
+ {n:2,name:"סגנון מועד ב׳ 2024"},
+ {n:3,name:"סגנון מועד א׳ 2025"},
+ {n:4,name:"סגנון מועד ב׳ 2025"}
+];
+function getAvailableExams(subjectKey){
+ return [1,2,3,4].filter(n=>EBANK[subjectKey+"_"+n]&&EBANK[subjectKey+"_"+n].length>0);
+}
+function getExamKey(){return state.examSubject+(state.examLevel?'_'+state.examLevel:'')+'_'+state.examNum}
+
 /* === SUBJECTS METADATA === */
 const SUBJECTS = {
  math:{name:'מתמטיקה',icon:'📐',levels:['3','4','5'],topics:{'3':'משוואות, אחוזים, סטטיסטיקה, גאומטריה בסיסית','4':'גזירה, פונקציות, טריגונומטריה במישור, סדרות','5':'גזירה מתקדמת, אינטגרלים, טריגונומטריה במרחב, וקטורים, אופטימיזציה'}},
@@ -995,7 +1572,9 @@ const SUBJECTS = {
 };
 
 /* === STATE === */
-let state={view:'home',subject:null,level:null,questions:[],qIdx:0,answered:false,answers:[],solved:0,correct:0,streak:0,maxStreak:0};
+let state={view:'home',subject:null,level:null,questions:[],qIdx:0,answered:false,answers:[],solved:0,correct:0,streak:0,maxStreak:0,
+ examFlow:false,examSubject:null,examLevel:null,examNum:null,examQuestions:[],examAnswers:[],examIdx:0,
+ examStartTime:null,examTimeLimit:0,examEndTime:null,examTimerHandle:null,examReviewExpanded:{}};
 const $=id=>document.getElementById(id);
 function save(){try{localStorage.setItem('bagrut_stats',JSON.stringify({solved:state.solved,correct:state.correct,maxStreak:state.maxStreak}))}catch(e){}}
 function load(){try{const s=JSON.parse(localStorage.getItem('bagrut_stats')||'{}');state.solved=s.solved||0;state.correct=s.correct||0;state.maxStreak=s.maxStreak||0}catch(e){}}
@@ -1009,26 +1588,36 @@ function render(){
  else if(state.view==='level')app.innerHTML=renderLevel();
  else if(state.view==='practice')app.innerHTML=renderPractice();
  else if(state.view==='results')app.innerHTML=renderResults();
+ else if(state.view==='examSelect')app.innerHTML=renderExamSelectView();
+ else if(state.view==='exam')app.innerHTML=renderExamView();
+ else if(state.view==='examResults')app.innerHTML=renderExamResultsView();
  updNav();
 }
 
 function renderHome(){
  const total=Object.values(QBANK).reduce((s,v)=>s+v.length,0);
+ const examTotal=Object.values(EBANK).reduce((s,v)=>s+v.length,0);
  let cards='';
  for(const [key,sub] of Object.entries(SUBJECTS)){
   let qcount=0;
   for(const lvl of sub.levels){const k=lvl?key+'_'+lvl:key;qcount+=(QBANK[k]||[]).length}
   const lvlTags=sub.levels.map(l=>l?`<span class="tag">${l} יח'</span>`:'<span class="tag tag-success">רמה אחת</span>').join('');
-  cards+=`<div class="subject-card" onclick="selectSubject('${key}')">
-   <span class="subject-icon">${sub.icon}</span>
-   <div class="subject-name">${sub.name}</div>
-   <div class="subject-meta">${lvlTags}</div>
-   <div class="subject-q-count">${qcount} שאלות זמינות לתרגול</div>
+  cards+=`<div class="subject-card">
+   <div onclick="selectSubject('${key}')" style="cursor:pointer">
+    <span class="subject-icon">${sub.icon}</span>
+    <div class="subject-name">${sub.name}</div>
+    <div class="subject-meta">${lvlTags}</div>
+    <div class="subject-q-count">${qcount} שאלות זמינות לתרגול</div>
+   </div>
+   <div class="subject-actions">
+    <button class="subject-btn" onclick="event.stopPropagation();selectSubject('${key}')">📚 תרגול</button>
+    <button class="subject-btn exam" onclick="event.stopPropagation();selectSubjectExam('${key}')">📝 מצב מבחן</button>
+   </div>
   </div>`;
  }
  return `<section class="hero view">
   <h1>תרגול בגרויות חינם</h1>
-  <p>${total}+ שאלות בגרות אמיתיות עם פתרונות מפורטים שלב-אחר-שלב — כמו מורה פרטי שזמין 24/7. בחרו מקצוע והתחילו לתרגל.</p>
+  <p>${total}+ שאלות לתרגול + ${examTotal}+ שאלות במצב סימולציית מבחן עם טיימר אמיתי. פתרונות מפורטים שלב-אחר-שלב — כמו מורה פרטי שזמין 24/7.</p>
   <button class="hero-cta" onclick="document.querySelector('.subjects').scrollIntoView({behavior:'smooth'})">בחרו מקצוע ←</button>
  </section>
  <h2 class="section-title">בחרו מקצוע</h2>
@@ -1037,19 +1626,30 @@ function renderHome(){
 
 function renderLevel(){
  const sub=SUBJECTS[state.subject];
- if(sub.levels.length===1&&sub.levels[0]===''){startPractice('');return ''}
+ if(sub.levels.length===1&&sub.levels[0]===''){
+   /* single-level subject — defer redirect to next tick to avoid double-render overwrite */
+   setTimeout(()=>{
+    if(state.examFlow)renderExamSelect('');
+    else startPractice('');
+   },0);
+   return '<div style="text-align:center;padding:40px;color:var(--text-dim)">טוען...</div>';
+ }
+ const mode=state.examFlow?'examSelect':'practice';
  let cards=sub.levels.map(l=>{
   const k=l?state.subject+'_'+l:state.subject;
-  const qc=(QBANK[k]||[]).length;
-  return `<div class="level-card" onclick="startPractice('${l}')">
+  const qc=state.examFlow?getAvailableExams(k).length:(QBANK[k]||[]).length;
+  const lbl=state.examFlow?'סימולציות זמינות':'שאלות';
+  const action=state.examFlow?`renderExamSelect('${l}')`:`startPractice('${l}')`;
+  return `<div class="level-card" onclick="${action}">
    <div class="level-num">${l}</div>
    <div class="level-label">יחידות לימוד</div>
    <div class="level-topics">${sub.topics[l]||''}</div>
-   <div style="margin-top:14px;color:var(--accent3);font-weight:600;font-size:14px">${qc} שאלות</div>
+   <div style="margin-top:14px;color:var(--accent3);font-weight:600;font-size:14px">${qc} ${lbl}</div>
   </div>`;
  }).join('');
+ const title=state.examFlow?`${sub.icon} ${sub.name} — סימולציית מבחן · בחרו רמה`:`${sub.icon} ${sub.name} — בחרו רמה`;
  return `<button class="back-btn" onclick="goHome()">← חזרה למקצועות</button>
-  <h2 class="section-title">${sub.icon} ${sub.name} — בחרו רמה</h2>
+  <h2 class="section-title">${title}</h2>
   <div class="levels view">${cards}</div>`;
 }
 
@@ -1131,8 +1731,18 @@ function renderResults(){
 }
 
 /* === ACTIONS === */
-function goHome(){state.view='home';state.subject=null;state.level=null;render();window.scrollTo({top:0,behavior:'smooth'})}
-function selectSubject(s){state.subject=s;state.view='level';render();window.scrollTo({top:0,behavior:'smooth'})}
+function goHome(){
+ if(state.examTimerHandle){clearInterval(state.examTimerHandle);state.examTimerHandle=null}
+ state.view='home';state.subject=null;state.level=null;state.examFlow=false;
+ state.examSubject=null;state.examLevel=null;state.examNum=null;
+ render();window.scrollTo({top:0,behavior:'smooth'})
+}
+function selectSubject(s){
+ state.subject=s;state.examFlow=false;
+ const sub=SUBJECTS[s];
+ if(sub.levels.length===1&&sub.levels[0]===''){startPractice('');return}
+ state.view='level';render();window.scrollTo({top:0,behavior:'smooth'});
+}
 function startPractice(level){
  state.level=level;
  const k=level?state.subject+'_'+level:state.subject;
@@ -1164,6 +1774,387 @@ function nextQ(){
  render();window.scrollTo({top:0,behavior:'smooth'});
 }
 function toggleAda(){$('adaPanel').classList.toggle('open')}
+
+/* === EXAM MODE === */
+function selectSubjectExam(s){
+ state.subject=s;state.examFlow=true;state.examSubject=s;
+ const sub=SUBJECTS[s];
+ if(sub.levels.length===1&&sub.levels[0]===''){renderExamSelect('');return}
+ state.view='level';render();window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderExamSelect(level){
+ state.examLevel=level;
+ state.view='examSelect';
+ render();window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderExamSelectView(){
+ const sub=SUBJECTS[state.examSubject];
+ const subjectKey=state.examSubject+(state.examLevel?'_'+state.examLevel:'');
+ const config=EXAM_CONFIG[subjectKey]||{time:120};
+ const available=getAvailableExams(subjectKey);
+ const history=loadExamHistory();
+ const cards=EXAM_LABELS.map(e=>{
+  const isAvail=available.includes(e.n);
+  const examKey=subjectKey+'_'+e.n;
+  const qs=EBANK[examKey]||[];
+  const avgDiff=qs.length?(qs.reduce((s,q)=>s+q.difficulty,0)/qs.length).toFixed(1):0;
+  const prev=history[examKey];
+  const prevScore=prev?`<div class="exam-prev-score">📊 ציון אחרון: ${prev.score}/100 · ${new Date(prev.date).toLocaleDateString('he-IL')}</div>`:'';
+  const disabledStyle=!isAvail?'opacity:.45;cursor:not-allowed':'';
+  const click=isAvail?`onclick="startExam('${subjectKey}',${e.n})"`:'';
+  return `<div class="exam-card" style="${disabledStyle}" ${click}>
+   <div class="exam-num">#${e.n}</div>
+   <div class="exam-title">סימולציה ${e.n}</div>
+   <div class="exam-subtitle">${e.name}</div>
+   <div class="exam-meta">
+    <span>📋 ${isAvail?qs.length:'—'} שאלות</span>
+    <span>⏱️ ${config.time} דק׳</span>
+    <span>★ קושי: ${isAvail?avgDiff:'—'}</span>
+   </div>
+   ${prevScore}
+   ${!isAvail?'<div style="margin-top:10px;color:var(--text-mute);font-size:13px;font-weight:600">⏳ בקרוב</div>':''}
+  </div>`;
+ }).join('');
+ const lvlTxt=state.examLevel?` (${state.examLevel} יח')`:'';
+ return `<button class="back-btn" onclick="goHome()">← תפריט ראשי</button>
+  <div class="exam-intro">
+   <h2>📝 מצב מבחן — ${sub.name}${lvlTxt}</h2>
+   <p>סימולציית מבחן בגרות מלאה: 10 שאלות, טיימר אמיתי של ${config.time} דקות, אפשרות לדלג בין שאלות ולסמן שאלות לבדיקה חוזרת. בסיום — ניתוח ביצועים מפורט.</p>
+  </div>
+  <div class="exam-grid view">${cards}</div>
+  <div class="ministry-link">
+   רוצה לתרגל מבחנים מקוריים? <a href="https://cms.education.gov.il/EducationCMS/Units/Exams/" target="_blank" rel="noopener">← קישור למאגר משרד החינוך</a>
+  </div>`;
+}
+
+function startExam(subjectKey,examNum){
+ const ebankKey=subjectKey+'_'+examNum;
+ const questions=EBANK[ebankKey];
+ if(!questions||!questions.length){alert('המבחן הזה עדיין לא זמין');return}
+ const parts=subjectKey.split('_');
+ state.examSubject=parts[0];
+ state.examLevel=parts.length>1?parts.slice(1).join('_'):'';
+ state.examNum=examNum;
+ state.examQuestions=questions.map(q=>({...q}));
+ state.examAnswers=questions.map(()=>({selected:null,marked:false,understood:null}));
+ state.examIdx=0;
+ const config=EXAM_CONFIG[subjectKey]||{time:120};
+ state.examTimeLimit=config.time*60;
+ state.examStartTime=Date.now();
+ state.examEndTime=Date.now()+state.examTimeLimit*1000;
+ state.examReviewExpanded={};
+ if(state.examTimerHandle)clearInterval(state.examTimerHandle);
+ state.examTimerHandle=setInterval(examTick,1000);
+ state.view='exam';
+ render();window.scrollTo({top:0,behavior:'smooth'});
+ if(typeof gtag==='function')gtag('event','start_exam',{exam:ebankKey,num:examNum});
+}
+
+function examTick(){
+ if(state.view!=='exam'){clearInterval(state.examTimerHandle);return}
+ const remaining=Math.max(0,Math.floor((state.examEndTime-Date.now())/1000));
+ const timer=$('examTimer');
+ if(timer){
+  timer.textContent=formatTime(remaining);
+  timer.classList.remove('warn','danger');
+  if(remaining<=300)timer.classList.add('danger');
+  else if(remaining<=600)timer.classList.add('warn');
+ }
+ if(remaining<=0){clearInterval(state.examTimerHandle);finishExam(true)}
+}
+
+function formatTime(sec){
+ const m=Math.floor(sec/60);
+ const s=sec%60;
+ return `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+}
+
+function renderExamView(){
+ const total=state.examQuestions.length;
+ const q=state.examQuestions[state.examIdx];
+ const ans=state.examAnswers[state.examIdx];
+ const remaining=Math.max(0,Math.floor((state.examEndTime-Date.now())/1000));
+ const timerClass=remaining<=300?'danger':(remaining<=600?'warn':'');
+ const subjectKey=state.examSubject+(state.examLevel?'_'+state.examLevel:'');
+ const subName=SUBJECTS[state.examSubject].name;
+ const lvl=state.examLevel?` ${state.examLevel} יח'`:'';
+ const dots=state.examAnswers.map((a,i)=>{
+  let cls='nav-dot';
+  if(a.selected!==null)cls+=' answered';
+  if(a.marked)cls+=' marked';
+  if(i===state.examIdx)cls+=' current';
+  return `<button class="${cls}" onclick="examGoTo(${i})" aria-label="שאלה ${i+1}">${i+1}</button>`;
+ }).join('');
+ const opts=q.options.map((o,i)=>{
+  const letter=['א','ב','ג','ד'][i];
+  const sel=ans.selected===i?' selected':'';
+  return `<button class="exam-option-btn${sel}" onclick="examSelect(${i})"><span class="option-letter">${letter}</span><span>${o}</span></button>`;
+ }).join('');
+ const markCls=ans.marked?'mark-btn active':'mark-btn';
+ const markLbl=ans.marked?'⚑ סומן לבדיקה':'🚩 סמן לבדיקה';
+ return `<div class="exam-shell view">
+  <div class="exam-bar">
+   <div class="exam-bar-top">
+    <div class="exam-title-bar">📝 בגרות AI · ${subName}${lvl} · סימולציה #${state.examNum}</div>
+    <div id="examTimer" class="exam-timer ${timerClass}">${formatTime(remaining)}</div>
+   </div>
+   <div class="exam-nav">${dots}</div>
+  </div>
+  <div class="exam-q-card">
+   <div class="exam-q-header">
+    <span class="exam-q-counter">שאלה ${state.examIdx+1} מתוך ${total}</span>
+    <div class="exam-q-actions">
+     <button class="${markCls}" onclick="examToggleMark()">${markLbl}</button>
+    </div>
+   </div>
+   <div class="q-meta">
+    <span class="q-topic">${q.topic}</span>
+    <span class="q-difficulty">קושי: <span style="color:var(--warning)">${'★'.repeat(q.difficulty)+'☆'.repeat(3-q.difficulty)}</span></span>
+   </div>
+   <div class="q-text">${q.text}</div>
+   <div class="options">${opts}</div>
+   <div class="exam-controls">
+    <div class="exam-controls-group">
+     <button class="btn btn-secondary" onclick="examPrev()" ${state.examIdx===0?'disabled style="opacity:.4;cursor:not-allowed"':''}>← הקודמת</button>
+     <button class="btn btn-secondary" onclick="examNext()" ${state.examIdx===total-1?'disabled style="opacity:.4;cursor:not-allowed"':''}>הבאה →</button>
+    </div>
+    <button class="btn btn-warn" onclick="examConfirmFinish()">🏁 סיים מבחן</button>
+   </div>
+  </div>
+ </div>`;
+}
+
+function examSelect(i){
+ state.examAnswers[state.examIdx].selected=i;
+ render();
+}
+
+function examToggleMark(){
+ state.examAnswers[state.examIdx].marked=!state.examAnswers[state.examIdx].marked;
+ render();
+}
+
+function examGoTo(i){
+ state.examIdx=i;
+ render();window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function examNext(){if(state.examIdx<state.examQuestions.length-1){state.examIdx++;render();window.scrollTo({top:0,behavior:'smooth'})}}
+function examPrev(){if(state.examIdx>0){state.examIdx--;render();window.scrollTo({top:0,behavior:'smooth'})}}
+
+function examConfirmFinish(){
+ const remaining=Math.max(0,Math.floor((state.examEndTime-Date.now())/1000));
+ const min=Math.floor(remaining/60);
+ const unanswered=state.examAnswers.filter(a=>a.selected===null).length;
+ let msg='';
+ if(unanswered>0)msg+=`<p style="color:#fbbf24"><strong>שים לב:</strong> נשארו ${unanswered} שאלות ללא תשובה.</p>`;
+ if(min>0)msg+=`<p>יש לך עוד <strong>${min} דקות</strong>. בטוח שרוצה לסיים?</p>`;
+ else msg+=`<p>בטוח שרוצה לסיים את המבחן?</p>`;
+ showModal('סיום מבחן',msg,[
+  {label:'חזור למבחן',cls:'btn-secondary',action:'closeModal()'},
+  {label:'כן, סיים',cls:'btn-warn',action:'finishExam(false)'}
+ ]);
+}
+
+function showModal(title,bodyHtml,actions){
+ let existing=document.getElementById('modalRoot');
+ if(existing)existing.remove();
+ const div=document.createElement('div');
+ div.id='modalRoot';
+ div.className='modal-bg';
+ div.innerHTML=`<div class="modal" onclick="event.stopPropagation()">
+  <h3>${title}</h3>
+  ${bodyHtml}
+  <div class="modal-actions">
+   ${actions.map(a=>`<button class="btn ${a.cls}" onclick="${a.action}">${a.label}</button>`).join('')}
+  </div>
+ </div>`;
+ div.onclick=closeModal;
+ document.body.appendChild(div);
+}
+function closeModal(){const e=document.getElementById('modalRoot');if(e)e.remove()}
+
+function finishExam(timeUp){
+ closeModal();
+ if(state.examTimerHandle)clearInterval(state.examTimerHandle);
+ const total=state.examQuestions.length;
+ let correct=0,wrong=0,skipped=0;
+ const topicStats={};
+ state.examAnswers.forEach((a,i)=>{
+  const q=state.examQuestions[i];
+  const t=q.topic;
+  if(!topicStats[t])topicStats[t]={total:0,correct:0};
+  topicStats[t].total++;
+  if(a.selected===null)skipped++;
+  else if(a.selected===q.correct){correct++;topicStats[t].correct++}
+  else wrong++;
+ });
+ const score=correct*10;
+ const elapsed=Math.floor((Date.now()-state.examStartTime)/1000);
+ state.examResults={
+  total,correct,wrong,skipped,score,
+  elapsed,timeUp,
+  timeLimit:state.examTimeLimit,
+  topicStats,
+  date:Date.now()
+ };
+ const key=state.examSubject+(state.examLevel?'_'+state.examLevel:'')+'_'+state.examNum;
+ saveExamHistory(key,score,elapsed);
+ state.view='examResults';
+ render();window.scrollTo({top:0,behavior:'smooth'});
+ if(typeof gtag==='function')gtag('event','finish_exam',{exam:key,score,timeUp:timeUp?'yes':'no'});
+}
+
+function loadExamHistory(){try{return JSON.parse(localStorage.getItem('bagrut_exams')||'{}')}catch(e){return{}}}
+function saveExamHistory(key,score,elapsed){
+ try{
+  const h=loadExamHistory();
+  h[key]={score,elapsed,date:Date.now()};
+  localStorage.setItem('bagrut_exams',JSON.stringify(h));
+ }catch(e){}
+}
+
+function renderExamResultsView(){
+ const r=state.examResults;
+ const total=r.total;
+ let label,cls,emoji,msg,encourage;
+ if(r.score>=90){label='מצוין! 🌟';cls='excellent';emoji='🏆';msg='ביצועים יוצאי דופן — אתה מוכן לבגרות!';encourage='שמור על הקצב הזה — אתה ברמה מעולה. נסה את הסימולציות הבאות כדי לבסס את הידע.'}
+ else if(r.score>=75){label='טוב מאוד 👍';cls='good';emoji='🎉';msg='ביצועים טובים מאוד — עוד תרגול קטן ותגיע למצוין!';encourage='כל הכבוד! יש לך בסיס איתן. בחן את הנושאים החלשים יותר בתרגול ממוקד.'}
+ else if(r.score>=55){label='עובר ✅';cls='pass';emoji='👍';msg='התקדמות יפה — המשך לתרגל את הנושאים שדורשים עבודה.';encourage='אתה בכיוון הנכון. תהיה ממוקד בנושאים החלשים ותראה שיפור משמעותי.'}
+ else{label='צריך עוד תרגול 💪';cls='practice';emoji='🎯';msg='זה רק ההתחלה — כל מומחה היה פעם מתחיל!';encourage='אל תתייאש — תרגול נכון יביא לתוצאות. התחל מהנושאים הבסיסיים בתרגול והתקדם.'}
+ const elapsedMin=Math.floor(r.elapsed/60);
+ const elapsedSec=r.elapsed%60;
+ const avgPerQ=Math.round(r.elapsed/r.total);
+ const remaining=Math.max(0,r.timeLimit-r.elapsed);
+ const remainingMin=Math.floor(remaining/60);
+
+ const topicArr=Object.entries(r.topicStats).map(([t,s])=>({topic:t,total:s.total,correct:s.correct,pct:Math.round((s.correct/s.total)*100)}));
+ topicArr.sort((a,b)=>b.pct-a.pct);
+ const strong=topicArr.filter(t=>t.pct>=75).slice(0,3);
+ const weak=topicArr.filter(t=>t.pct<50).slice(0,3);
+ const topicBars=topicArr.map(t=>{
+  let barCls='medium';
+  if(t.pct>=75)barCls='strong';
+  else if(t.pct<50)barCls='weak';
+  return `<div class="topic-row">
+   <div class="topic-name">${t.topic}</div>
+   <div class="topic-bar"><div class="topic-bar-fill ${barCls}" style="width:${t.pct}%"></div></div>
+   <div class="topic-score">${t.correct}/${t.total}</div>
+  </div>`;
+ }).join('');
+
+ const reviewItems=state.examQuestions.map((q,i)=>{
+  const a=state.examAnswers[i];
+  let statusCls='skip',statusIcon='⚪',statusText='דילגת';
+  if(a.selected!==null){
+   if(a.selected===q.correct){statusCls='correct';statusIcon='✅';statusText='נכון'}
+   else{statusCls='wrong';statusIcon='❌';statusText='שגוי'}
+  }
+  const opts=q.options.map((o,j)=>{
+   const letter=['א','ב','ג','ד'][j];
+   let oCls='option-btn';
+   if(j===q.correct)oCls+=' correct';
+   else if(j===a.selected&&j!==q.correct)oCls+=' wrong';
+   return `<button class="${oCls}" disabled><span class="option-letter">${letter}</span><span>${o}</span></button>`;
+  }).join('');
+  const correctLetter=['א','ב','ג','ד'][q.correct];
+  const isOpen=state.examReviewExpanded[i]?' open':'';
+  const understood=a.understood;
+  return `<div class="review-item${isOpen}" id="rev-${i}">
+   <div class="review-head" onclick="examToggleReview(${i})">
+    <div class="review-num ${statusCls}">${i+1}</div>
+    <div class="review-summary">${q.topic} · ${statusText}</div>
+    <div class="review-status">${statusIcon}</div>
+   </div>
+   <div class="review-body">
+    <div class="review-content">
+     <div class="q-text">${q.text}</div>
+     <div class="options">${opts}</div>
+     <div class="solution">
+      <div class="sol-section"><div class="sol-title">📝 תשובה נכונה</div><div class="sol-body">תשובה ${correctLetter}: ${q.options[q.correct]}</div></div>
+      <div class="sol-section"><div class="sol-title">📚 הסבר</div><div class="sol-body">${q.explanation}</div></div>
+     </div>
+     <div class="review-feedback">
+      <button class="${understood==='yes'?'active':''}" onclick="examFeedback(${i},'yes')">✅ הבנתי</button>
+      <button class="${understood==='no'?'active':''}" onclick="examFeedback(${i},'no')">❓ עדיין לא ברור</button>
+     </div>
+    </div>
+   </div>
+  </div>`;
+ }).join('');
+
+ const subName=SUBJECTS[state.examSubject].name;
+ const subjectKey=state.examSubject+(state.examLevel?'_'+state.examLevel:'');
+ const lvl=state.examLevel?` ${state.examLevel} יח'`:'';
+
+ const strongTxt=strong.length?`<p><strong style="color:#10b981">המקצועות החזקים שלך:</strong> ${strong.map(t=>t.topic).join(', ')}</p>`:'';
+ const weakTxt=weak.length?`<p><strong style="color:#f97316">מומלץ לתרגל עוד:</strong> ${weak.map(t=>t.topic).join(', ')}</p>`:'';
+
+ return `<div class="exam-results view">
+  <button class="back-btn" onclick="goHome()">← תפריט ראשי</button>
+  <div class="score-hero ${cls}">
+   <div class="score-emoji">${emoji}</div>
+   <div class="score-label ${cls}">${label}</div>
+   <div class="score-number">${r.score}<span style="font-size:36px;color:var(--text-dim);font-weight:700">/100</span></div>
+   <p style="color:var(--text-dim);font-size:16px;margin-top:8px">📝 בגרות AI · ${subName}${lvl} · סימולציה #${state.examNum}</p>
+   <p style="color:var(--text);font-size:17px;margin-top:14px;font-weight:600">${msg}</p>
+   ${r.timeUp?'<p style="color:#fbbf24;margin-top:10px;font-size:14px">⏰ המבחן הסתיים בזמן</p>':''}
+  </div>
+
+  <div class="time-analysis">
+   <div class="time-card"><div class="time-card-num">${r.correct}</div><div class="time-card-label">תשובות נכונות</div></div>
+   <div class="time-card"><div class="time-card-num" style="color:#ef4444">${r.wrong}</div><div class="time-card-label">תשובות שגויות</div></div>
+   <div class="time-card"><div class="time-card-num" style="color:var(--text-dim)">${r.skipped}</div><div class="time-card-label">דילגת</div></div>
+   <div class="time-card"><div class="time-card-num">${elapsedMin}:${elapsedSec.toString().padStart(2,'0')}</div><div class="time-card-label">זמן ביצוע</div></div>
+   <div class="time-card"><div class="time-card-num">${avgPerQ}s</div><div class="time-card-label">ממוצע לשאלה</div></div>
+   <div class="time-card"><div class="time-card-num">${remainingMin}m</div><div class="time-card-label">זמן שנותר</div></div>
+  </div>
+
+  ${topicBars?`<div class="topic-breakdown">
+   <h3>📊 פירוט לפי נושא</h3>
+   ${topicBars}
+  </div>`:''}
+
+  <div class="encourage">
+   <h3>💬 המסר שלי אליך</h3>
+   <p>${encourage}</p>
+   ${strongTxt}
+   ${weakTxt}
+  </div>
+
+  <div class="review-list">
+   <h3>🔍 סקירת שאלות — לחץ להרחבת פתרון</h3>
+   ${reviewItems}
+  </div>
+
+  <div class="results-actions">
+   <button class="btn btn-primary" onclick="selectSubjectExam('${state.examSubject}')">📝 נסה סימולציה נוספת</button>
+   <button class="btn btn-secondary" onclick="goToWeakPractice('${subjectKey}')">📚 חזור לתרגול נושאים חלשים</button>
+   <button class="btn btn-secondary" onclick="goHome()">🏠 תפריט ראשי</button>
+  </div>
+ </div>`;
+}
+
+function examToggleReview(i){
+ state.examReviewExpanded[i]=!state.examReviewExpanded[i];
+ render();
+}
+
+function examFeedback(i,val){
+ state.examAnswers[i].understood=val;
+ render();
+}
+
+function goToWeakPractice(subjectKey){
+ const parts=subjectKey.split('_');
+ const subject=parts[0];
+ const level=parts.length>1?parts.slice(1).join('_'):'';
+ state.subject=subject;
+ state.examFlow=false;
+ startPractice(level);
+}
 
 /* FAQ */
 document.addEventListener('click',e=>{const q=e.target.closest('.faq-q');if(q)q.parentElement.classList.toggle('open')});
