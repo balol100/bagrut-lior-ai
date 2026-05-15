@@ -38,7 +38,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
 
 <!-- Manifest -->
-<link rel="manifest" href='data:application/manifest+json;charset=utf-8,{"name":"בגרות לליאור","short_name":"בגרות","start_url":"/","display":"standalone","background_color":"%231a1a2e","theme_color":"%231a1a2e","icons":[{"src":"data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>📚</text></svg>","sizes":"any","type":"image/svg+xml"}]}'>
+<link rel="manifest" href='data:application/manifest+json;charset=utf-8,{"name":"בגרות AI — תרגול חכם לבגרויות","short_name":"בגרות AI","start_url":"/","display":"standalone","background_color":"%231a1a2e","theme_color":"%231a1a2e","icons":[{"src":"data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>📚</text></svg>","sizes":"any","type":"image/svg+xml"}]}'>
 
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -64,7 +64,7 @@ gtag('config', 'G-QPKVJ3W9F9');
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "בגרות לליאור — תרגול בגרויות חינם",
+  "name": "בגרות AI — תרגול חכם לבגרויות",
   "url": "https://bagrut.lior-ai.com/",
   "description": "תרגול בגרות חינם במתמטיקה, אנגלית, היסטוריה, אזרחות, תנ״ך ומדעי המחשב עם פתרונות מפורטים.",
   "applicationCategory": "EducationalApplication",
@@ -346,7 +346,7 @@ footer{border-top:1px solid var(--card-border);padding:36px 0 24px;margin-top:60
 
 <header>
  <div class="container nav">
-  <div class="logo" onclick="goHome()"><span class="logo-icon">📚</span><span>בגרות לליאור</span></div>
+  <div class="logo" onclick="goHome()"><span class="logo-icon">📚</span><span>בגרות AI</span></div>
   <div class="nav-stats" id="navStats" style="display:none">
    <span class="stat-pill">🎯 דיוק: <strong id="statAccuracy">0%</strong></span>
    <span class="stat-pill streak">🔥 רצף: <strong id="statStreak">0</strong></span>
@@ -398,7 +398,7 @@ footer{border-top:1px solid var(--card-border);padding:36px 0 24px;margin-top:60
 <footer class="container">
  <div class="footer-grid">
   <div>
-   <h4>בגרות לליאור</h4>
+   <h4>בגרות AI</h4>
    <p style="font-size:13px">תרגול בגרויות חינם עם פתרונות מפורטים. נבנה באהבה לתלמידי ישראל.</p>
   </div>
   <div>
@@ -1276,7 +1276,6 @@ function renderContinuePrompt(){
 
 function renderLevel(){
  const sub=SUBJECTS[state.subject];
- if(sub.levels.length===1&&sub.levels[0]===''){startPractice('');return ''}
  let cards=sub.levels.map(l=>{
   const k=l?state.subject+'_'+l:state.subject;
   const qc=(QBANK[k]||[]).length;
@@ -1372,8 +1371,13 @@ function renderResults(){
 
 /* === ACTIONS === */
 function goHome(){state.view='home';state.subject=null;state.level=null;render();window.scrollTo({top:0,behavior:'smooth'})}
-function selectSubject(s){state.subject=s;state.level=null;state.view='level';render();window.scrollTo({top:0,behavior:'smooth'})}
-
+function selectSubject(s){
+ state.subject=s;state.level=null;
+ const sub=SUBJECTS[s];
+ if(sub&&sub.levels.length===1&&sub.levels[0]===''){startPractice('')}
+ else{state.view='level';render()}
+ window.scrollTo({top:0,behavior:'smooth'});
+}
 function startPractice(level){
  state.level=level;
  const k=subjectKey(state.subject,level);
