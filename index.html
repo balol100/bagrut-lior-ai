@@ -236,17 +236,107 @@ footer{border-top:1px solid var(--card-border);padding:36px 0 24px;margin-top:60
 .ada-panel h4{font-size:14px;margin-bottom:10px}
 .ada-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:14px}
 .ada-row button{background:var(--card);border:1px solid var(--card-border);color:var(--text);padding:4px 10px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px}
+/* Welcome-back / progress UI */
+.welcome-back{background:linear-gradient(135deg,rgba(124,58,237,.15),rgba(59,130,246,.1));border:1px solid rgba(124,58,237,.3);border-radius:var(--radius);padding:22px;margin-bottom:24px;text-align:center}
+.welcome-back h3{font-size:22px;font-weight:800;margin-bottom:6px;background:var(--gradient);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.welcome-back .wb-stats{color:var(--text-dim);font-size:15px;line-height:1.7}
+.welcome-back .wb-stats strong{color:var(--text);font-weight:700}
+.subject-progress-row{margin-top:14px}
+.subject-progress-bar{background:rgba(255,255,255,.06);height:6px;border-radius:999px;overflow:hidden;margin-top:6px}
+.subject-progress-fill{height:100%;background:var(--gradient);border-radius:999px;transition:width .4s}
+.subject-progress-text{font-size:12px;color:var(--text-dim);display:flex;justify-content:space-between;align-items:center}
+.subject-card.completed{border-color:rgba(16,185,129,.45)}
+.subject-card.in-progress{border-color:rgba(124,58,237,.45)}
+.completion-badge{position:absolute;top:12px;left:12px;background:var(--success);color:#fff;width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;box-shadow:0 4px 12px rgba(16,185,129,.4)}
+.reset-link{background:transparent;color:var(--text-mute);border:none;font-family:inherit;font-size:13px;cursor:pointer;padding:4px 8px;text-decoration:underline}
+.reset-link:hover{color:var(--error)}
+.continue-card{text-align:center}
+.continue-card h2{font-size:24px;font-weight:800;margin-bottom:10px}
+.continue-card .cc-stats{color:var(--text-dim);margin-bottom:20px;font-size:15px;line-height:1.7}
+.continue-card .cc-stats strong{color:var(--text)}
+
 @media (max-width:640px){
- .hero{padding:18px 0 30px}
- .q-card{padding:20px}
- .q-text{font-size:17px}
- .option-btn{padding:14px 16px;font-size:15px}
+ .container{padding:0 12px}
+ main{padding:20px 0 60px}
+ header{padding:16px 0}
+ .logo{font-size:18px}
+ .logo-icon{font-size:24px}
+ .hero{padding:14px 0 24px}
+ .hero h1{margin-bottom:10px}
+ .hero p{margin-bottom:18px;font-size:15px}
+ .hero-cta{padding:12px 22px;font-size:15px}
+ .section-title{font-size:20px;margin-bottom:14px}
+ .subjects{grid-template-columns:1fr;gap:12px}
+ .subject-card{padding:16px}
+ .subject-icon{font-size:36px;margin-bottom:8px}
+ .subject-name{font-size:19px}
+ .levels{grid-template-columns:1fr;gap:12px}
+ .level-card{padding:18px}
+ .practice-shell{max-width:100%}
+ .q-card{padding:16px}
+ .q-text{font-size:17px;margin-bottom:18px}
+ .q-meta{font-size:12px}
+ .option-btn{padding:13px 14px;font-size:15px;gap:10px}
+ .option-letter{width:28px;height:28px;font-size:13px}
+ .solution{padding:16px}
+ .sol-body{font-size:14px}
  .score-row{grid-template-columns:1fr}
- .nav-stats{font-size:12px;gap:8px}
- .stat-pill{padding:4px 10px}
+ .nav-stats{font-size:11px;gap:5px}
+ .stat-pill{padding:3px 8px}
  .results-emoji{font-size:60px}
  .score-big{font-size:56px}
+ .results h2{font-size:24px}
+ .promo{padding:18px;margin:30px 0}
+ .promo h3{font-size:19px}
+ .promo p{font-size:14px}
+ .faq{margin:30px 0 20px}
+ .faq-q{padding:14px 16px;font-size:15px}
+ .faq-item.open .faq-a{padding:0 16px 14px;font-size:14px}
+ footer{padding:24px 0 18px;margin-top:36px}
+ .footer-grid{gap:18px}
+ .q-actions{gap:8px}
+ .btn{padding:11px 18px;font-size:14px}
+ .welcome-back{padding:18px;margin-bottom:18px}
+ .welcome-back h3{font-size:19px}
+ .welcome-back .wb-stats{font-size:14px}
+ .continue-card{padding:22px 16px}
+ .continue-card h2{font-size:20px}
+ .completion-badge{top:10px;left:10px;width:24px;height:24px;font-size:12px}
+ .ada{width:46px;height:46px;font-size:22px;bottom:16px;left:16px}
+ .ada-panel{left:16px;bottom:74px;width:calc(100vw - 32px);max-width:280px}
 }
+
+@media (max-width:420px){
+ .container{padding:0 8px}
+ .hero h1{font-size:26px}
+ .hero p{font-size:14px}
+ .hero-cta{padding:11px 18px;font-size:14px}
+ .subject-card{padding:14px}
+ .subject-icon{font-size:32px}
+ .subject-name{font-size:18px}
+ .q-card{padding:12px}
+ .q-text{font-size:16px}
+ .option-btn{padding:12px;font-size:14px;gap:8px}
+ .option-letter{width:26px;height:26px;font-size:12px}
+ .level-card{padding:16px}
+ .level-num{font-size:40px}
+ .promo{padding:14px}
+ .promo h3{font-size:17px}
+ .solution{padding:14px}
+ .faq-q{padding:12px 14px;font-size:14px}
+ .faq-item.open .faq-a{padding:0 14px 12px;font-size:13px}
+ .nav-stats{gap:4px}
+ .stat-pill{padding:3px 7px;font-size:10px}
+ .btn{padding:10px 14px;font-size:13px}
+ .results-emoji{font-size:52px}
+ .score-big{font-size:46px}
+ .score-card{padding:14px}
+ .score-card-num{font-size:24px}
+ .welcome-back{padding:14px}
+ .welcome-back h3{font-size:17px}
+ .continue-card h2{font-size:18px}
+}
+
 .high-contrast{filter:contrast(1.5)}
 .large-text{font-size:118%}
 </style>
@@ -335,6 +425,7 @@ footer{border-top:1px solid var(--card-border);padding:36px 0 24px;margin-top:60
  </div>
  <div class="footer-bottom">
   © 2026 <a href="https://lior-ai.com" target="_blank" rel="noopener">lior-ai.com</a> · בנוי באהבה בישראל 🇮🇱 · השאלות לתרגול בלבד ואינן מוצרים רשמיים של משרד החינוך
+  <div style="margin-top:10px"><button class="reset-link" onclick="resetAllProgress()">איפוס ההתקדמות שלי</button></div>
  </div>
 </footer>
 
@@ -1033,11 +1124,76 @@ const SUBJECTS = {
 };
 
 /* === STATE === */
-let state={view:'home',subject:null,level:null,questions:[],qIdx:0,answered:false,answers:[],solved:0,correct:0,streak:0,maxStreak:0};
+let state={view:'home',subject:null,level:null,questions:[],qIdx:0,answered:false,answers:[],streak:0};
+let progress={lastVisit:null,subjects:{},totalAnswered:0,totalCorrect:0,overallAccuracy:0,streak:0,bestStreak:0};
+const PKEY='bagrut_progress';
 const $=id=>document.getElementById(id);
-function save(){try{localStorage.setItem('bagrut_stats',JSON.stringify({solved:state.solved,correct:state.correct,maxStreak:state.maxStreak}))}catch(e){}}
-function load(){try{const s=JSON.parse(localStorage.getItem('bagrut_stats')||'{}');state.solved=s.solved||0;state.correct=s.correct||0;state.maxStreak=s.maxStreak||0}catch(e){}}
-function updNav(){if(state.solved>0){$('navStats').style.display='flex';$('statAccuracy').textContent=Math.round(state.correct/state.solved*100)+'%';$('statStreak').textContent=state.streak;$('statSolved').textContent=state.solved}}
+
+function defaultSubProgress(){return{answered:0,correct:0,wrong:0,answeredQuestions:[],lastQuestionIndex:0,streakBest:0}}
+
+function loadProgress(){
+ try{
+  const raw=localStorage.getItem(PKEY);
+  if(raw){const s=JSON.parse(raw);if(s&&typeof s==='object'){progress=Object.assign({lastVisit:null,subjects:{},totalAnswered:0,totalCorrect:0,overallAccuracy:0,streak:0,bestStreak:0},s);if(!progress.subjects||typeof progress.subjects!=='object')progress.subjects={}}}
+  else{
+   /* migrate legacy bagrut_stats if present */
+   const legacy=localStorage.getItem('bagrut_stats');
+   if(legacy){try{const l=JSON.parse(legacy);if(l){progress.totalAnswered=l.solved||0;progress.totalCorrect=l.correct||0;progress.bestStreak=l.maxStreak||0;progress.overallAccuracy=progress.totalAnswered?Math.round(progress.totalCorrect/progress.totalAnswered*100):0}}catch(e){}}
+  }
+ }catch(e){progress.subjects={}}
+}
+
+function saveProgress(){
+ try{
+  progress.lastVisit=new Date().toISOString().slice(0,10);
+  progress.overallAccuracy=progress.totalAnswered?Math.round(progress.totalCorrect/progress.totalAnswered*100):0;
+  localStorage.setItem(PKEY,JSON.stringify(progress));
+ }catch(e){}
+}
+
+function resetAllProgress(){
+ if(!confirm('פעולה זו תמחק את כל ההתקדמות שלך לצמיתות. להמשיך?'))return;
+ try{localStorage.removeItem(PKEY);localStorage.removeItem('bagrut_stats')}catch(e){}
+ progress={lastVisit:null,subjects:{},totalAnswered:0,totalCorrect:0,overallAccuracy:0,streak:0,bestStreak:0};
+ state.streak=0;
+ if(state.view==='practice'||state.view==='results'||state.view==='continue')goHome();else render();
+}
+
+function resetSubject(k){
+ const sp=progress.subjects[k];
+ if(sp){
+  progress.totalAnswered=Math.max(0,progress.totalAnswered-sp.answered);
+  progress.totalCorrect=Math.max(0,progress.totalCorrect-sp.correct);
+  delete progress.subjects[k];
+  saveProgress();
+ }
+}
+
+function subjectKey(subject,level){return level?subject+'_'+level:subject}
+
+function subjectAggregate(subject){
+ const sub=SUBJECTS[subject];
+ let answered=0,total=0,correct=0,touched=false;
+ for(const lvl of sub.levels){
+  const k=subjectKey(subject,lvl);
+  const all=QBANK[k]||[];
+  total+=all.length;
+  const sp=progress.subjects[k];
+  if(sp){answered+=sp.answered;correct+=sp.correct;if(sp.answered>0)touched=true}
+ }
+ const status=(total>0&&answered>=total)?'completed':(touched?'inprogress':'notstarted');
+ return{answered,total,correct,status}
+}
+
+function updNav(){
+ if(progress.totalAnswered>0){
+  $('navStats').style.display='flex';
+  $('statAccuracy').textContent=progress.overallAccuracy+'%';
+  $('statStreak').textContent=state.streak;
+  $('statSolved').textContent=progress.totalAnswered;
+ }else{$('navStats').style.display='none'}
+}
+
 function shuffle(a){const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]]}return r}
 
 /* === RENDER === */
@@ -1045,6 +1201,7 @@ function render(){
  const app=$('app');
  if(state.view==='home')app.innerHTML=renderHome();
  else if(state.view==='level')app.innerHTML=renderLevel();
+ else if(state.view==='continue')app.innerHTML=renderContinuePrompt();
  else if(state.view==='practice')app.innerHTML=renderPractice();
  else if(state.view==='results')app.innerHTML=renderResults();
  updNav();
@@ -1052,25 +1209,69 @@ function render(){
 
 function renderHome(){
  const total=Object.values(QBANK).reduce((s,v)=>s+v.length,0);
+ const isReturning=progress.totalAnswered>0;
+
+ /* Build subject entries with aggregate progress for sorting */
+ const entries=Object.entries(SUBJECTS).map(([key,sub])=>({key,sub,agg:subjectAggregate(key)}));
+ const order={notstarted:0,inprogress:1,completed:2};
+ entries.sort((a,b)=>order[a.agg.status]-order[b.agg.status]);
+
  let cards='';
- for(const [key,sub] of Object.entries(SUBJECTS)){
-  let qcount=0;
-  for(const lvl of sub.levels){const k=lvl?key+'_'+lvl:key;qcount+=(QBANK[k]||[]).length}
+ for(const {key,sub,agg} of entries){
   const lvlTags=sub.levels.map(l=>l?`<span class="tag">${l} יח'</span>`:'<span class="tag tag-success">רמה אחת</span>').join('');
-  cards+=`<div class="subject-card" onclick="selectSubject('${key}')">
+  const pct=agg.total?Math.round(agg.answered/agg.total*100):0;
+  const cardCls='subject-card'+(agg.status==='completed'?' completed':(agg.status==='inprogress'?' in-progress':''));
+  const badge=agg.status==='completed'?'<span class="completion-badge" title="הושלם">✓</span>':'';
+  const progressRow=agg.answered>0?`<div class="subject-progress-row">
+    <div class="subject-progress-text"><span>${agg.answered}/${agg.total} שאלות</span><span>${pct}%</span></div>
+    <div class="subject-progress-bar"><div class="subject-progress-fill" style="width:${pct}%"></div></div>
+   </div>`:`<div class="subject-q-count">${agg.total} שאלות זמינות לתרגול</div>`;
+  cards+=`<div class="${cardCls}" onclick="selectSubject('${key}')">
+   ${badge}
    <span class="subject-icon">${sub.icon}</span>
    <div class="subject-name">${sub.name}</div>
    <div class="subject-meta">${lvlTags}</div>
-   <div class="subject-q-count">${qcount} שאלות זמינות לתרגול</div>
+   ${progressRow}
   </div>`;
  }
+
+ const welcome=isReturning?`<div class="welcome-back view">
+  <h3>ברוכים השבים! 👋</h3>
+  <div class="wb-stats">ענית כבר על <strong>${progress.totalAnswered}</strong> שאלות, דיוק <strong>${progress.overallAccuracy}%</strong>${progress.bestStreak?` · רצף שיא <strong>🔥 ${progress.bestStreak}</strong>`:''}</div>
+ </div>`:'';
+
  return `<section class="hero view">
   <h1>תרגול בגרויות חינם</h1>
   <p>${total}+ שאלות בגרות אמיתיות עם פתרונות מפורטים שלב-אחר-שלב — כמו מורה פרטי שזמין 24/7. בחרו מקצוע והתחילו לתרגל.</p>
   <button class="hero-cta" onclick="document.querySelector('.subjects').scrollIntoView({behavior:'smooth'})">בחרו מקצוע ←</button>
  </section>
+ ${welcome}
  <h2 class="section-title">בחרו מקצוע</h2>
  <div class="subjects view">${cards}</div>`;
+}
+
+function renderContinuePrompt(){
+ const k=subjectKey(state.subject,state.level);
+ const sub=SUBJECTS[state.subject];
+ const all=QBANK[k]||[];
+ const sp=progress.subjects[k]||defaultSubProgress();
+ const remaining=Math.max(0,all.length-sp.answered);
+ const accuracy=sp.answered?Math.round(sp.correct/sp.answered*100):0;
+ return `<button class="back-btn" onclick="goHome()">← תפריט ראשי</button>
+  <div class="practice-shell view">
+   <div class="q-card continue-card">
+    <h2>🎯 רוצה להמשיך מאיפה שהפסקת?</h2>
+    <div class="cc-stats">
+     ${sub.icon} <strong>${sub.name}${state.level?' '+state.level+" יח'":''}</strong><br>
+     ענית על <strong>${sp.answered}/${all.length}</strong> שאלות · דיוק <strong>${accuracy}%</strong><br>
+     נותרו <strong>${remaining}</strong> שאלות חדשות
+    </div>
+    <div class="results-actions">
+     ${remaining>0?`<button class="btn btn-primary" onclick="continueSubject()">המשך מאיפה שהפסקתי</button>`:''}
+     <button class="btn btn-secondary" onclick="restartSubject()">${remaining>0?'התחל מחדש':'התחל מחדש (התקדמות תיאופס)'}</button>
+    </div>
+   </div>
+  </div>`;
 }
 
 function renderLevel(){
@@ -1171,29 +1372,83 @@ function renderResults(){
 
 /* === ACTIONS === */
 function goHome(){state.view='home';state.subject=null;state.level=null;render();window.scrollTo({top:0,behavior:'smooth'})}
-function selectSubject(s){state.subject=s;state.view='level';render();window.scrollTo({top:0,behavior:'smooth'})}
+function selectSubject(s){state.subject=s;state.level=null;state.view='level';render();window.scrollTo({top:0,behavior:'smooth'})}
+
 function startPractice(level){
  state.level=level;
- const k=level?state.subject+'_'+level:state.subject;
+ const k=subjectKey(state.subject,level);
  const all=QBANK[k]||[];
  if(all.length===0){alert('עדיין לא הוספנו שאלות לרמה זו — חזרו בקרוב!');return}
- state.questions=shuffle(all).slice(0,Math.min(10,all.length));
+ const sp=progress.subjects[k];
+ if(sp&&sp.answered>0){
+  state.view='continue';
+  render();window.scrollTo({top:0,behavior:'smooth'});
+  return;
+ }
+ beginPractice(false);
+}
+
+function continueSubject(){beginPractice(true)}
+function restartSubject(){
+ const k=subjectKey(state.subject,state.level);
+ resetSubject(k);
+ beginPractice(false);
+}
+
+function beginPractice(continueMode){
+ const k=subjectKey(state.subject,state.level);
+ const all=QBANK[k]||[];
+ const sp=progress.subjects[k];
+ let pool;
+ if(continueMode&&sp){
+  const done=new Set(sp.answeredQuestions||[]);
+  pool=all.map((q,i)=>({q,origIdx:i})).filter(x=>!done.has(x.origIdx));
+  if(pool.length===0){
+   /* Already finished — restart fresh */
+   resetSubject(k);
+   pool=all.map((q,i)=>({q,origIdx:i}));
+  }
+ }else{
+  pool=all.map((q,i)=>({q,origIdx:i}));
+ }
+ const picked=shuffle(pool).slice(0,Math.min(10,pool.length));
+ state.questions=picked.map(x=>Object.assign({},x.q,{_origIdx:x.origIdx}));
  state.qIdx=0;state.answered=false;state.showSolution=false;state.lastAnswer=null;
  state.answers=state.questions.map(q=>({topic:q.topic,answered:false,correct:false}));
  state.view='practice';
  render();window.scrollTo({top:0,behavior:'smooth'});
- if(typeof gtag==='function')gtag('event','start_practice',{subject:state.subject,level:level});
+ if(typeof gtag==='function')gtag('event','start_practice',{subject:state.subject,level:state.level,mode:continueMode?'continue':'fresh'});
 }
+
 function answer(i){
  if(state.answered)return;
  const q=state.questions[state.qIdx];
  state.answered=true;state.lastAnswer=i;
  const isCorrect=i===q.correct;
  state.answers[state.qIdx]={topic:q.topic,answered:true,correct:isCorrect};
- state.solved++;
- if(isCorrect){state.correct++;state.streak++;state.maxStreak=Math.max(state.maxStreak,state.streak)}
- else{state.streak=0;state.showSolution=true}
- save();render();
+
+ /* Update subject-level progress */
+ const k=subjectKey(state.subject,state.level);
+ if(!progress.subjects[k])progress.subjects[k]=defaultSubProgress();
+ const sp=progress.subjects[k];
+ const origIdx=q._origIdx;
+ if(typeof origIdx==='number'&&!sp.answeredQuestions.includes(origIdx)){
+  sp.answeredQuestions.push(origIdx);
+  sp.answered++;
+  if(isCorrect)sp.correct++;else sp.wrong++;
+  sp.lastQuestionIndex=origIdx;
+  progress.totalAnswered++;
+  if(isCorrect)progress.totalCorrect++;
+ }
+ if(isCorrect){
+  state.streak++;
+  if(state.streak>sp.streakBest)sp.streakBest=state.streak;
+  if(state.streak>progress.bestStreak)progress.bestStreak=state.streak;
+  progress.streak=state.streak;
+ }else{
+  state.streak=0;progress.streak=0;state.showSolution=true;
+ }
+ saveProgress();render();
  if(typeof gtag==='function')gtag('event','answer_q',{correct:isCorrect,topic:q.topic});
 }
 function showSol(){state.showSolution=true;render()}
@@ -1226,7 +1481,7 @@ if('serviceWorker' in navigator){
 }
 
 /* INIT */
-load();render();
+loadProgress();state.streak=progress.streak||0;render();
 </script>
 </body>
 </html>
