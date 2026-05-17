@@ -447,6 +447,37 @@ footer .reset-row{margin-top:10px}
  .score-emoji{font-size:56px}
  .exam-grid{grid-template-columns:1fr}
 }
+
+/* === TOPIC SELECTION === */
+.topic-select-view{max-width:760px;margin:0 auto}
+.topic-select-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:18px}
+.topic-select-card h2{font-size:22px;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+.topic-select-card .ts-sub{color:var(--text-dim);font-size:14px;margin-bottom:14px;line-height:1.6}
+.topic-actions{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 14px}
+.topic-action-btn{background:var(--card);border:1px solid var(--card-border);color:var(--text);padding:8px 16px;border-radius:999px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.topic-action-btn:hover{border-color:var(--accent3);background:rgba(124,58,237,.08)}
+.topic-action-btn.weak{border-color:rgba(239,68,68,.35);color:#fca5a5}
+.topic-action-btn.weak:hover{border-color:#ef4444;background:rgba(239,68,68,.1)}
+.topic-pills-wrap{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 14px}
+.topic-pill{background:rgba(255,255,255,.04);border:2px solid var(--card-border);color:var(--text);padding:9px 16px;border-radius:999px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:8px;line-height:1.3}
+.topic-pill:hover{border-color:var(--accent3);background:rgba(124,58,237,.08);transform:translateY(-1px)}
+.topic-pill.active{background:rgba(124,58,237,.18);border-color:var(--accent3);color:#fff}
+.topic-pill.active::before{content:"✓";font-weight:800;color:var(--accent3)}
+.topic-pill.weak{border-color:rgba(239,68,68,.45)}
+.topic-pill.weak.active{background:rgba(239,68,68,.15);border-color:#ef4444;color:#fca5a5}
+.topic-pill.weak.active::before{color:#fca5a5}
+.topic-pill .topic-count{font-size:11px;color:var(--text-mute);font-family:'Inter',sans-serif;font-weight:500}
+.topic-pill .topic-score-mini{font-size:11px;color:var(--text-mute);font-family:'Inter',sans-serif;font-weight:700;padding:1px 6px;border-radius:999px;background:rgba(255,255,255,.05)}
+.topic-pill.weak .topic-score-mini{color:#fca5a5;background:rgba(239,68,68,.15)}
+.topic-select-summary{color:var(--text-dim);font-size:13px;margin:8px 0 14px;padding:10px 14px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid var(--card-border)}
+.topic-select-summary strong{color:var(--text);font-weight:700}
+.topic-select-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.topic-select-actions .btn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+@media (max-width:640px){
+ .topic-select-card{padding:18px}
+ .topic-select-card h2{font-size:19px}
+ .topic-pill{padding:8px 12px;font-size:13px}
+}
 </style>
 </head>
 <body>
@@ -1624,6 +1655,7 @@ const SUBJECTS = {
 
 /* === STATE === */
 let state={view:'home',subject:null,level:null,questions:[],qIdx:0,answered:false,answers:[],streak:0,
+ selectedTopics:null,topicList:[],
  examFlow:false,examSubject:null,examLevel:null,examNum:null,examQuestions:[],examAnswers:[],examIdx:0,
  examStartTime:null,examTimeLimit:0,examEndTime:null,examTimerHandle:null,examReviewExpanded:{}};
 let progress={lastVisit:null,subjects:{},totalAnswered:0,totalCorrect:0,overallAccuracy:0,streak:0,bestStreak:0};
@@ -1702,6 +1734,7 @@ function render(){
  const app=$('app');
  if(state.view==='home')app.innerHTML=renderHome();
  else if(state.view==='level')app.innerHTML=renderLevel();
+ else if(state.view==='topicSelect')app.innerHTML=renderTopicSelect();
  else if(state.view==='continue')app.innerHTML=renderContinuePrompt();
  else if(state.view==='practice')app.innerHTML=renderPractice();
  else if(state.view==='results')app.innerHTML=renderResults();
@@ -1813,6 +1846,60 @@ function renderLevel(){
   <div class="levels view">${cards}</div>`;
 }
 
+function renderTopicSelect(){
+ const k=subjectKey(state.subject,state.level);
+ const sub=SUBJECTS[state.subject];
+ const all=QBANK[k]||[];
+ const topics=state.topicList||[];
+ const sp=progress.subjects[k]||defaultSubProgress();
+ const topicStats=sp.topicStats||{};
+ const selected=new Set(state.selectedTopics||[]);
+ const filteredCount=selected.size===0?0:all.filter(q=>selected.has(q.topic)).length;
+ const hasProgress=sp.answered>0;
+ const hasAnyTopicStats=Object.values(topicStats).some(s=>s&&s.answered>0);
+ const remaining=Math.max(0,all.length-sp.answered);
+
+ const pills=topics.map((t,idx)=>{
+  const ts=topicStats[t];
+  const score=ts&&ts.answered>0?Math.round(ts.correct/ts.answered*100):null;
+  const isWeak=score!==null&&score<60;
+  const count=all.filter(q=>q.topic===t).length;
+  const scoreHtml=score!==null?`<span class="topic-score-mini">${score}%</span>`:'';
+  const cls='topic-pill'+(selected.has(t)?' active':'')+(isWeak?' weak':'');
+  return `<button class="${cls}" onclick="toggleTopic(${idx})" type="button"><span>${t}</span><span class="topic-count">(${count})</span>${scoreHtml}</button>`;
+ }).join('');
+
+ const lvlTxt=state.level?` ${state.level} יח'`:'';
+ const progressLine=hasProgress?`<div style="color:var(--text-dim);font-size:13px;margin-top:4px">📊 ענית כבר על <strong style="color:var(--text)">${sp.answered}/${all.length}</strong> שאלות · נותרו ${remaining} חדשות</div>`:'';
+ const summaryText=selected.size===0
+  ?`<strong style="color:var(--warning)">לא נבחרו נושאים</strong> — בחרו לפחות נושא אחד כדי להתחיל`
+  :(selected.size===topics.length
+    ?`<strong>כל הנושאים (${topics.length})</strong> · ${filteredCount} שאלות זמינות לתרגול`
+    :`<strong>${selected.size}/${topics.length}</strong> נושאים נבחרו · ${filteredCount} שאלות זמינות`);
+ const weakBtnHint=hasAnyTopicStats?'':' (זמין אחרי תרגול ראשון)';
+ const startLabel=hasProgress?'המשך מאיפה שהפסקתי ←':'התחל תרגול ←';
+ const restartBtn=hasProgress?`<button class="btn btn-secondary" onclick="restartWithTopics()">התחל מחדש</button>`:'';
+
+ return `<button class="back-btn" onclick="goHome()">← תפריט ראשי</button>
+  <div class="topic-select-view view">
+   <div class="topic-select-card">
+    <h2><span>${sub.icon}</span><span>${sub.name}${lvlTxt}</span></h2>
+    <div class="ts-sub">בחרו את הנושאים שאתם רוצים לתרגל. מומלץ להתמקד בנושאים שאתם פחות חזקים בהם.</div>
+    ${progressLine}
+    <div class="topic-actions">
+     <button class="topic-action-btn" type="button" onclick="selectAllTopics()">✓ כל הנושאים</button>
+     <button class="topic-action-btn weak" type="button" onclick="selectWeakTopics()" title="${hasAnyTopicStats?'בחר אוטומטית נושאים עם ציון מתחת ל-60%':'תרגלו תחילה כדי שנוכל לזהות נושאים חלשים'}">🎯 נושאים חלשים${weakBtnHint}</button>
+    </div>
+    <div class="topic-pills-wrap">${pills}</div>
+    <div class="topic-select-summary">${summaryText}</div>
+    <div class="topic-select-actions">
+     <button class="btn btn-primary" onclick="startWithTopics()"${selected.size===0?' disabled':''}>${startLabel}</button>
+     ${restartBtn}
+    </div>
+   </div>
+  </div>`;
+}
+
 function renderPractice(){
  if(state.qIdx>=state.questions.length)return renderResults();
  const q=state.questions[state.qIdx];
@@ -1909,13 +1996,11 @@ function startPractice(level){
  const k=subjectKey(state.subject,level);
  const all=QBANK[k]||[];
  if(all.length===0){alert('עדיין לא הוספנו שאלות לרמה זו — חזרו בקרוב!');return}
- const sp=progress.subjects[k];
- if(sp&&sp.answered>0){
-  state.view='continue';
-  render();window.scrollTo({top:0,behavior:'smooth'});
-  return;
- }
- beginPractice(false);
+ const topics=[...new Set(all.map(q=>q.topic).filter(Boolean))];
+ state.topicList=topics;
+ state.selectedTopics=topics.slice();
+ state.view='topicSelect';
+ render();window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function continueSubject(){beginPractice(true)}
@@ -1925,29 +2010,74 @@ function restartSubject(){
  beginPractice(false);
 }
 
+/* === TOPIC SELECTION === */
+function toggleTopic(idx){
+ const t=state.topicList[idx];
+ if(!t)return;
+ if(!state.selectedTopics)state.selectedTopics=[];
+ const i=state.selectedTopics.indexOf(t);
+ if(i>=0)state.selectedTopics.splice(i,1);
+ else state.selectedTopics.push(t);
+ render();
+}
+function selectAllTopics(){
+ state.selectedTopics=(state.topicList||[]).slice();
+ render();
+}
+function selectWeakTopics(){
+ const k=subjectKey(state.subject,state.level);
+ const sp=progress.subjects[k]||defaultSubProgress();
+ const ts=sp.topicStats||{};
+ const weak=(state.topicList||[]).filter(t=>{
+  const s=ts[t];
+  if(!s||s.answered===0)return false;
+  return (s.correct/s.answered)<0.6;
+ });
+ if(weak.length===0){
+  alert('עדיין אין מספיק נתונים לזיהוי נושאים חלשים. תרגלו עוד כמה שאלות כדי שנוכל להמליץ.');
+  return;
+ }
+ state.selectedTopics=weak;
+ render();
+}
+function startWithTopics(){
+ if(!state.selectedTopics||state.selectedTopics.length===0){alert('בחרו לפחות נושא אחד');return}
+ const k=subjectKey(state.subject,state.level);
+ const sp=progress.subjects[k];
+ if(sp&&sp.answered>0){beginPractice(true);return}
+ beginPractice(false);
+}
+function restartWithTopics(){
+ const k=subjectKey(state.subject,state.level);
+ resetSubject(k);
+ beginPractice(false);
+}
+
 function beginPractice(continueMode){
  const k=subjectKey(state.subject,state.level);
  const all=QBANK[k]||[];
  const sp=progress.subjects[k];
+ const selSet=(state.selectedTopics&&state.selectedTopics.length>0)?new Set(state.selectedTopics):null;
+ const matchesTopic=q=>!selSet||selSet.has(q.topic);
  let pool;
  if(continueMode&&sp){
   const done=new Set(sp.answeredQuestions||[]);
-  pool=all.map((q,i)=>({q,origIdx:i})).filter(x=>!done.has(x.origIdx));
+  pool=all.map((q,i)=>({q,origIdx:i})).filter(x=>!done.has(x.origIdx)&&matchesTopic(x.q));
   if(pool.length===0){
-   /* Already finished — restart fresh */
-   resetSubject(k);
-   pool=all.map((q,i)=>({q,origIdx:i}));
+   /* No new questions in selected topics — fall back to all selected-topic questions */
+   pool=all.map((q,i)=>({q,origIdx:i})).filter(x=>matchesTopic(x.q));
   }
  }else{
-  pool=all.map((q,i)=>({q,origIdx:i}));
+  pool=all.map((q,i)=>({q,origIdx:i})).filter(x=>matchesTopic(x.q));
  }
+ if(pool.length===0){alert('לא נמצאו שאלות לנושאים שבחרתם');return}
  const picked=shuffle(pool).slice(0,Math.min(10,pool.length));
  state.questions=picked.map(x=>Object.assign({},x.q,{_origIdx:x.origIdx}));
  state.qIdx=0;state.answered=false;state.showSolution=false;state.lastAnswer=null;
  state.answers=state.questions.map(q=>({topic:q.topic,answered:false,correct:false}));
  state.view='practice';
  render();window.scrollTo({top:0,behavior:'smooth'});
- if(typeof gtag==='function')gtag('event','start_practice',{subject:state.subject,level:state.level,mode:continueMode?'continue':'fresh'});
+ if(typeof gtag==='function')gtag('event','start_practice',{subject:state.subject,level:state.level,mode:continueMode?'continue':'fresh',topics:(state.selectedTopics||[]).length});
 }
 
 function answer(i){
@@ -1961,12 +2091,17 @@ function answer(i){
  const k=subjectKey(state.subject,state.level);
  if(!progress.subjects[k])progress.subjects[k]=defaultSubProgress();
  const sp=progress.subjects[k];
+ if(!sp.topicStats)sp.topicStats={};
  const origIdx=q._origIdx;
  if(typeof origIdx==='number'&&!sp.answeredQuestions.includes(origIdx)){
   sp.answeredQuestions.push(origIdx);
   sp.answered++;
   if(isCorrect)sp.correct++;else sp.wrong++;
   sp.lastQuestionIndex=origIdx;
+  const tname=q.topic||'כללי';
+  if(!sp.topicStats[tname])sp.topicStats[tname]={answered:0,correct:0};
+  sp.topicStats[tname].answered++;
+  if(isCorrect)sp.topicStats[tname].correct++;
   progress.totalAnswered++;
   if(isCorrect)progress.totalCorrect++;
  }
