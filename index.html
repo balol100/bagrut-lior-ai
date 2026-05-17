@@ -189,30 +189,11 @@ main{padding:32px 0 80px;min-height:80vh}
 .weak-topics{background:var(--card);border:1px solid var(--card-border);border-radius:12px;padding:20px;margin:20px 0;text-align:right}
 .weak-topics h3{font-size:16px;margin-bottom:10px}
 .results-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}
-.promo{background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(239,68,68,.08));border:1px solid rgba(245,158,11,.3);border-radius:var(--radius);padding:24px;margin:50px 0;text-align:center}
-.promo h3{font-size:22px;font-weight:800;margin-bottom:8px;background:var(--gradient4);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.promo p{color:var(--text-dim);margin-bottom:14px;max-width:560px;margin-right:auto;margin-left:auto}
-.promo a{display:inline-block;background:var(--gradient4);color:#fff;padding:10px 24px;border-radius:999px;text-decoration:none;font-weight:700}
-.seo-banner{background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(16,185,129,.12));border:1px solid rgba(245,158,11,.4);border-radius:var(--radius);padding:30px 24px;margin:40px 0;text-align:center;position:relative;overflow:hidden;box-shadow:0 10px 40px rgba(245,158,11,.08)}
-.seo-banner::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 15% 50%,rgba(245,158,11,.18),transparent 55%),radial-gradient(circle at 85% 50%,rgba(16,185,129,.15),transparent 55%);pointer-events:none}
-.seo-banner-inner{position:relative;z-index:1}
-.seo-banner h3{font-size:clamp(18px,2.4vw,24px);font-weight:900;margin-bottom:10px;background:linear-gradient(135deg,#fbbf24 0%,#10b981 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1.3}
-.seo-banner p{color:var(--text-dim);margin:0 auto 20px;max-width:560px;font-size:15px}
-.seo-banner-cta{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#f59e0b 0%,#10b981 100%);color:#0f0f1e;padding:13px 30px;border-radius:999px;text-decoration:none;font-weight:800;font-size:15px;box-shadow:0 8px 22px rgba(245,158,11,.3);transition:transform .2s,box-shadow .2s}
-.seo-banner-cta:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(16,185,129,.45)}
-.lior-footer-promo{background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(245,158,11,.08));border:1px solid rgba(16,185,129,.28);border-radius:var(--radius);padding:32px 24px;margin:50px 0 20px;text-align:center}
-.lior-footer-promo h3{font-size:20px;font-weight:800;margin-bottom:10px;background:linear-gradient(135deg,#10b981 0%,#fbbf24 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.lior-footer-promo p{color:var(--text-dim);margin:0 auto 20px;max-width:600px;font-size:15px;line-height:1.7}
-.lior-footer-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.lior-footer-ctas a{display:inline-flex;align-items:center;gap:6px;padding:11px 24px;border-radius:999px;text-decoration:none;font-weight:700;font-size:14px;transition:transform .2s,box-shadow .2s}
-.lior-footer-ctas .cta-primary{background:linear-gradient(135deg,#f59e0b 0%,#10b981 100%);color:#0f0f1e;box-shadow:0 6px 18px rgba(245,158,11,.3)}
-.lior-footer-ctas .cta-primary:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(16,185,129,.45)}
-.lior-footer-ctas .cta-secondary{background:rgba(255,255,255,.04);color:var(--text);border:1px solid rgba(16,185,129,.45)}
-.lior-footer-ctas .cta-secondary:hover{background:rgba(16,185,129,.12);transform:translateY(-2px);border-color:#10b981}
-.results-credit{margin-top:18px;font-size:13px;color:var(--text-mute);letter-spacing:.2px}
-.results-credit a{background:linear-gradient(135deg,#fbbf24,#10b981);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;font-weight:800}
-.results-credit a:hover{filter:brightness(1.15)}
-.faq{margin:60px 0 30px}
+.seo-banner{background:linear-gradient(135deg,rgba(245,158,11,.10),rgba(16,185,129,.08));border:1px solid rgba(245,158,11,.25);border-radius:12px;padding:14px 18px;margin:36px 0 24px;text-align:center;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;font-size:14px}
+.seo-banner span{color:var(--text-dim)}
+.seo-banner-cta{display:inline-block;background:linear-gradient(135deg,#f59e0b 0%,#10b981 100%);color:#0f0f1e;padding:6px 16px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px;white-space:nowrap}
+.seo-banner-cta:hover{filter:brightness(1.1)}
+.faq{margin:30px 0}
 .faq-item{background:var(--card);border:1px solid var(--card-border);border-radius:12px;margin-bottom:10px;overflow:hidden}
 .faq-q{padding:18px 22px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:16px}
 .faq-q:hover{background:rgba(255,255,255,.04)}
@@ -220,13 +201,9 @@ main{padding:32px 0 80px;min-height:80vh}
 .faq-item.open .faq-arrow{transform:rotate(180deg)}
 .faq-a{padding:0 22px;max-height:0;overflow:hidden;color:var(--text-dim);line-height:1.7;transition:all .3s}
 .faq-item.open .faq-a{padding:0 22px 18px;max-height:500px}
-footer{border-top:1px solid var(--card-border);padding:36px 0 24px;margin-top:60px;color:var(--text-dim);font-size:14px}
-.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-bottom:24px}
-.footer-grid h4{color:var(--text);font-size:14px;font-weight:700;margin-bottom:10px}
-.footer-grid a{color:var(--text-dim);text-decoration:none;display:block;padding:3px 0}
-.footer-grid a:hover{color:var(--accent3)}
-.footer-bottom{text-align:center;padding-top:20px;border-top:1px solid var(--card-border);color:var(--text-mute);font-size:13px}
-.footer-bottom a{color:var(--accent3);text-decoration:none}
+footer{border-top:1px solid var(--card-border);padding:20px 0;margin-top:40px;text-align:center;color:var(--text-mute);font-size:13px}
+footer a{color:var(--accent3);text-decoration:none}
+footer .reset-row{margin-top:10px}
 .streak{display:inline-flex;align-items:center;gap:4px}
 .fire{filter:drop-shadow(0 0 8px rgba(245,158,11,.6))}
 .ada{position:fixed;bottom:20px;left:20px;width:50px;height:50px;border-radius:50%;background:var(--gradient);border:none;color:#fff;font-size:24px;cursor:pointer;box-shadow:var(--shadow);z-index:100;display:flex;align-items:center;justify-content:center;transition:transform .2s}
@@ -286,14 +263,10 @@ footer{border-top:1px solid var(--card-border);padding:36px 0 24px;margin-top:60
  .results-emoji{font-size:60px}
  .score-big{font-size:56px}
  .results h2{font-size:24px}
- .promo{padding:18px;margin:30px 0}
- .promo h3{font-size:19px}
- .promo p{font-size:14px}
- .faq{margin:30px 0 20px}
+ .faq{margin:24px 0 18px}
  .faq-q{padding:14px 16px;font-size:15px}
  .faq-item.open .faq-a{padding:0 16px 14px;font-size:14px}
- footer{padding:24px 0 18px;margin-top:36px}
- .footer-grid{gap:18px}
+ footer{padding:16px 0;margin-top:30px}
  .q-actions{gap:8px}
  .btn{padding:11px 18px;font-size:14px}
  .welcome-back{padding:18px;margin-bottom:18px}
@@ -320,8 +293,6 @@ footer{border-top:1px solid var(--card-border);padding:36px 0 24px;margin-top:60
  .option-letter{width:26px;height:26px;font-size:12px}
  .level-card{padding:16px}
  .level-num{font-size:40px}
- .promo{padding:14px}
- .promo h3{font-size:17px}
  .solution{padding:14px}
  .faq-q{padding:12px 14px;font-size:14px}
  .faq-item.open .faq-a{padding:0 14px 12px;font-size:13px}
@@ -496,11 +467,8 @@ footer{border-top:1px solid var(--card-border);padding:36px 0 24px;margin-top:60
  <div id="app"></div>
 
  <div class="seo-banner">
-  <div class="seo-banner-inner">
-   <h3>🚀 בעל עסק? קידום SEO אוטומטי עם AI מ-490 ₪/חודש</h3>
-   <p>קידום אורגני בגוגל, ניהול תוכן ודיווחי ביצועים — הכל מופעל ב-AI. שירות SEO לעסקים קטנים ובינוניים בישראל, ללא התחייבות.</p>
-   <a class="seo-banner-cta" href="https://lior-ai.com/seo/" target="_blank" rel="noopener">למידע נוסף ולהתחלה ←</a>
-  </div>
+  <span>בעל עסק? קידום SEO אורגני בגוגל מ-490 ₪/חודש</span>
+  <a class="seo-banner-cta" href="https://lior-ai.com/seo/" target="_blank" rel="noopener">למידע נוסף ←</a>
  </div>
 
  <section class="faq" id="faqSection">
@@ -510,60 +478,14 @@ footer{border-top:1px solid var(--card-border);padding:36px 0 24px;margin-top:60
   <div class="faq-item"><div class="faq-q">כמה שאלות יש בבגרות אנגלית 5 יחידות? <span class="faq-arrow">▼</span></div><div class="faq-a">בבגרות אנגלית 5 יחידות יש בדרך כלל 3 פרקים: Reading Comprehension, Modules ו-Composition, עם סך הכל כ-30-40 שאלות שונות לאורך 3 שעות. מומלץ להתאמן בכל סוגי השאלות ולא רק בקטעי הקריאה.</div></div>
   <div class="faq-item"><div class="faq-q">מה ההבדל בין 4 ל-5 יחידות במתמטיקה? <span class="faq-arrow">▼</span></div><div class="faq-a">בגרות 5 יחידות כוללת חומר מורחב — חשבון אינטגרלי וגזירה מתקדמים, טריגונומטריה במרחב, וקטורים תלת-מימדיים, ושאלות אופטימיזציה מורכבות. בגרות 4 יחידות מכסה גזירות בסיסיות, פונקציות, וטריגונומטריה במישור. ההפרש בציון הסופי משוקלל לטובת הבונוס: 5 יחידות מקבלות בונוס של 35 נקודות במקום 25.</div></div>
   <div class="faq-item"><div class="faq-q">כמה זמן להקדיש לכל שאלה בבגרות? <span class="faq-arrow">▼</span></div><div class="faq-a">חוק האצבע: הזמן הכולל חלקי מספר השאלות, פחות 15%-20% לבדיקה. בבגרות במתמטיקה של 3 שעות עם 6 שאלות — כ-25 דקות לשאלה. אם נתקעתם מעבר ל-30 דקות בשאלה אחת — דלגו וחזרו אליה בסוף.</div></div>
-  <div class="faq-item"><div class="faq-q">האם השימוש באתר הוא בחינם? <span class="faq-arrow">▼</span></div><div class="faq-a">כן! כל שאלות הבגרות, הפתרונות וההסברים זמינים בחינם לחלוטין, ללא צורך בהרשמה. האתר ממומן באמצעות פרסומות לא-פולשניות וחבילת התרומה החברתית של lior-ai.com.</div></div>
+  <div class="faq-item"><div class="faq-q">האם השימוש באתר הוא בחינם? <span class="faq-arrow">▼</span></div><div class="faq-a">כן! כל שאלות הבגרות, הפתרונות וההסברים זמינים בחינם לחלוטין, ללא צורך בהרשמה.</div></div>
   <div class="faq-item"><div class="faq-q">האם אפשר ללמוד היסטוריה ואזרחות בעל פה? <span class="faq-arrow">▼</span></div><div class="faq-a">לא — זו טעות נפוצה. ההיסטוריה דורשת הבנה של סיבה ותוצאה, רצף אירועים והקשר חברתי. אזרחות דורשת הבנה של עקרונות וכיצד הם פועלים בפועל. שינון בלי הבנה לא יחזיק במבחנים שדורשים ניתוח ופיתוח טיעון.</div></div>
  </section>
-
- <div class="promo">
-  <h3>🚀 ההורים שלך יזם או בעל עסק?</h3>
-  <p>lior-ai.com מציע שירותי SEO וקידום אורגני בגוגל לעסקים קטנים ובינוניים בישראל — מ-₪500 לחודש. תגידו להם שראיתם.</p>
-  <a href="https://lior-ai.com/seo" target="_blank" rel="noopener">למידע נוסף ←</a>
- </div>
 </main>
 
-<section class="container">
- <div class="lior-footer-promo">
-  <h3>🛠️ הכלי הזה נבנה על ידי lior-ai.com</h3>
-  <p>בונים כלים דיגיטליים, אתרים וקידום SEO לעסקים — מהרעיון ועד לעמוד הראשון בגוגל. עם AI שעובד בשבילכם 24/7.</p>
-  <div class="lior-footer-ctas">
-   <a class="cta-primary" href="https://lior-ai.com/seo/" target="_blank" rel="noopener">שירותי SEO ←</a>
-   <a class="cta-secondary" href="https://lior-ai.com" target="_blank" rel="noopener">lior-ai.com</a>
-  </div>
- </div>
-</section>
-
 <footer class="container">
- <div class="footer-grid">
-  <div>
-   <h4>בגרות AI</h4>
-   <p style="font-size:13px">תרגול בגרויות חינם עם פתרונות מפורטים. נבנה באהבה לתלמידי ישראל.</p>
-  </div>
-  <div>
-   <h4>מקצועות</h4>
-   <a onclick="selectSubject('math')">מתמטיקה</a>
-   <a onclick="selectSubject('english')">אנגלית</a>
-   <a onclick="selectSubject('history')">היסטוריה</a>
-   <a onclick="selectSubject('civics')">אזרחות</a>
-   <a onclick="selectSubject('bible')">תנ״ך</a>
-   <a onclick="selectSubject('cs')">מדעי המחשב</a>
-  </div>
-  <div>
-   <h4>כלים נוספים מ-lior-ai</h4>
-   <a href="https://convert.lior-ai.com" target="_blank" rel="noopener">convert — המרת קבצים</a>
-   <a href="https://english.lior-ai.com" target="_blank" rel="noopener">english — לימוד אנגלית לילדים</a>
-   <a href="https://learn.lior-ai.com" target="_blank" rel="noopener">learn — הרפתקת לימוד לילדים</a>
-   <a href="https://stocks.lior-ai.com" target="_blank" rel="noopener">stocks — ניתוח מניות AI</a>
-  </div>
-  <div>
-   <h4>קידום עסקים</h4>
-   <a href="https://lior-ai.com" target="_blank" rel="noopener">lior-ai.com</a>
-   <a href="https://lior-ai.com/seo" target="_blank" rel="noopener">שירותי SEO</a>
-  </div>
- </div>
- <div class="footer-bottom">
-  © 2026 <a href="https://lior-ai.com" target="_blank" rel="noopener">lior-ai.com</a> · בנוי באהבה בישראל 🇮🇱 · השאלות לתרגול בלבד ואינן מוצרים רשמיים של משרד החינוך
-  <div style="margin-top:10px"><button class="reset-link" onclick="resetAllProgress()">איפוס ההתקדמות שלי</button></div>
- </div>
+ מופעל על ידי <a href="https://lior-ai.com" target="_blank" rel="noopener">lior_Ai</a>
+ <div class="reset-row"><button class="reset-link" onclick="resetAllProgress()">איפוס ההתקדמות שלי</button></div>
 </footer>
 
 <button class="ada" onclick="toggleAda()" aria-label="נגישות" title="נגישות">♿</button>
@@ -1965,7 +1887,6 @@ function renderResults(){
    <button class="btn btn-primary" onclick="startPractice('${state.level}')">תרגול שוב</button>
    <button class="btn btn-secondary" onclick="goHome()">בחירת מקצוע אחר</button>
   </div>
-  <div class="results-credit">⚡ מופעל על ידי <a href="https://lior-ai.com/seo/" target="_blank" rel="noopener">lior_Ai</a></div>
  </div>`;
 }
 
