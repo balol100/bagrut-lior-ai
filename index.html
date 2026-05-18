@@ -3713,5 +3713,22 @@ if('serviceWorker' in navigator){
 loadProgress();state.streak=progress.streak||0;render();
 </script>
 <script src="https://lior-ai.com/ai-demo-widget.js" defer></script>
+<style>
+/* Aria widget overrides — .ada accessibility button lives at left:20px bottom:20px, so move Aria to bottom-right */
+#xa-launcher{left:auto !important;right:20px !important;bottom:24px !important}
+#xa-proactive{left:auto !important;right:92px !important;bottom:40px !important;border-radius:18px 18px 18px 4px !important}
+@media(max-width:680px){#xa-proactive{right:16px !important;bottom:96px !important;max-width:calc(100vw - 32px) !important}}
+</style>
+<script>
+/* Widget uses /images/aibot.webp which is host-relative and 404s on this subdomain. Force absolute URL. */
+(function(){
+ function fix(){
+  var img=document.querySelector('#xa-launcher img');
+  if(img){img.onerror=null;img.src='https://lior-ai.com/images/aibot.webp';return true}
+  return false
+ }
+ var n=0,iv=setInterval(function(){if(fix()||++n>60)clearInterval(iv)},100);
+})();
+</script>
 </body>
 </html>
