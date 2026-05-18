@@ -3712,5 +3712,11 @@ if('serviceWorker' in navigator){
 /* INIT */
 loadProgress();state.streak=progress.streak||0;render();
 </script>
+<div id="aria-float" style="position:fixed;bottom:20px;right:20px;z-index:9999;cursor:pointer">
+  <div id="aria-btn" onclick="document.getElementById('aria-panel').style.display=document.getElementById('aria-panel').style.display==='none'?'flex':'none'" style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#0D7C66,#085041);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);color:white;font-size:24px">🤖</div>
+  <div id="aria-panel" style="display:none;position:fixed;bottom:90px;right:20px;width:360px;height:500px;border-radius:16px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.4);flex-direction:column">
+    <iframe src="https://lior-ai.com/chat-widget.html" style="width:100%;height:100%;border:none"></iframe>
+  </div>
+</div>
 </body>
 </html>
